@@ -18,6 +18,7 @@ export interface Agent {
   icon: string;
   fields: FormField[];
   outputKeys?: string[];
+  docPath?: string;
 }
 
 export const agents: Agent[] = [
@@ -45,6 +46,7 @@ export const agents: Agent[] = [
       },
     ],
     outputKeys: ["message"],
+    docPath: "/docs/AI YouTube Content Repurposer Workflow.pdf",
   },
   {
     id: "lead-auto-reply",
@@ -78,6 +80,7 @@ export const agents: Agent[] = [
       },
     ],
     outputKeys: ["reply"],
+    docPath: "/docs/AI Lead Capture & Auto Response System.pdf",
   },
   {
     id: "resume-job-matcher",
@@ -104,6 +107,7 @@ export const agents: Agent[] = [
       },
     ],
     outputKeys: ["message"],
+    docPath: "/docs/AI Resume-Based Job Matching Agent Workflow.pdf",
   },
   {
     id: "multilingual-support",
@@ -137,6 +141,7 @@ export const agents: Agent[] = [
       },
     ],
     outputKeys: ["message"],
+    docPath: "/docs/Multilingual AI Customer Support Bot Workflow.pdf",
   },
   {
     id: "business-insights",
@@ -147,6 +152,7 @@ export const agents: Agent[] = [
     icon: "📊",
     fields: [],
     outputKeys: [],
+    docPath: "/docs/AI Business Insights & Alert Agent.pdf",
   },
 ];
 

@@ -44,7 +44,7 @@ export default function RootLayout({
               </Link>
               <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
                 <Link href="/" className="hover:text-foreground transition-colors">Agents</Link>
-                <a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Documentation</a>
+                <Link href="/documentation" className="hover:text-foreground transition-colors">Documentation</Link>
                 <Link href="#" className="hover:text-foreground transition-colors">Pricing</Link>
               </nav>
               <div className="flex items-center gap-4">
@@ -70,8 +70,8 @@ export default function RootLayout({
                 <div>
                   <h4 className="font-semibold text-foreground mb-4">Resources</h4>
                   <ul className="space-y-2 text-sm text-muted">
-                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">Workflow Documentation</a></li>
-                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">Sample Outputs</a></li>
+                    <li><Link href="/documentation" className="hover:text-accent transition-colors">Workflow Documentation</Link></li>
+                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">Github Source</a></li>
                     <li><a href="#" className="hover:text-accent transition-colors">Community</a></li>
                   </ul>
                 </div>
