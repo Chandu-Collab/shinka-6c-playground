@@ -1,6 +1,7 @@
 import AgentRunner from "@/components/AgentRunner";
 import LeadCaptureUI from "@/components/LeadCaptureUI";
 import JobMatchingUI from "@/components/JobMatchingUI";
+import YoutubeRepurposerUI from "@/components/YoutubeRepurposerUI";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -55,6 +56,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <LeadCaptureUI agent={agent} />
       ) : agent.id === "resume-job-matcher" ? (
         <JobMatchingUI agent={agent} />
+      ) : agent.id === "youtube-repurposer" ? (
+        <YoutubeRepurposerUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}
