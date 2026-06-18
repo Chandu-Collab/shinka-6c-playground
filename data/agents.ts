@@ -105,6 +105,39 @@ export const agents: Agent[] = [
     ],
     outputKeys: ["message"],
   },
+  {
+    id: "multilingual-support",
+    name: "Multilingual AI Support Desk",
+    description:
+      "Send queries in any language. Our AI detects, translates, classifies urgency, and auto-replies or escalates.",
+    route: "/agent/multilingual-support",
+    icon: "🌍",
+    fields: [
+      {
+        name: "email",
+        label: "Your Email",
+        type: "email",
+        placeholder: "customer@example.com",
+        required: true,
+      },
+      {
+        name: "subject",
+        label: "Subject",
+        type: "text",
+        placeholder: "Issue with my recent order...",
+        required: true,
+      },
+      {
+        name: "message",
+        label: "Your Query (Any Language)",
+        type: "textarea",
+        placeholder: "मुझे मेरा पैसा वापस चाहिए / I want a refund / నాకు నా డబ్బు తిరిగి కావాలి",
+        required: true,
+        rows: 6,
+      },
+    ],
+    outputKeys: ["message"],
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
