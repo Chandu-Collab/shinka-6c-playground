@@ -22,11 +22,8 @@ function generateMockResponse(
   payload: Record<string, unknown>
 ): Record<string, unknown> {
   if (agentId === "youtube-repurposer") {
-    const url = String(payload.youtubeUrl ?? "video");
     return {
-      linkedinPost: `🎬 Just watched an incredible video: ${url}\n\nKey takeaways:\n• Insight #1 that resonated deeply\n• Practical tip you can apply today\n• A mindset shift worth considering\n\nWhat's the best content you've repurposed lately? Drop a comment 👇\n\n#ContentMarketing #YouTube #AI`,
-      twitterThread: `🧵 Thread: Repurposing ${url}\n\n1/ Great content deserves a second life. Here's how I'd break this down:\n\n2/ Hook: Start with the most surprising insight from the video.\n\n3/ Value: Share 3-5 actionable takeaways.\n\n4/ CTA: Ask your audience a question to drive engagement.\n\n5/ Repurpose across LinkedIn, blog, and newsletter. One video → multiple assets.`,
-      blogDraft: `# Repurposing YouTube Content: A Practical Guide\n\nSource: ${url}\n\n## Introduction\nGreat video content often contains enough value to fuel an entire week of social posts, a newsletter edition, and a blog article.\n\n## Key Insights\n1. **Lead with the hook** — Capture attention in the first sentence.\n2. **Extract actionable tips** — Readers want practical value.\n3. **Adapt the tone** — LinkedIn is professional, Twitter is punchy, blogs are thorough.\n\n## Conclusion\nOne well-chosen video can become a content engine. Start repurposing today.`,
+      message: "Your content is being generated and will be sent to your email shortly. (Mock response)",
     };
   }
 

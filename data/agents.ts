@@ -30,14 +30,21 @@ export const agents: Agent[] = [
     icon: "▶",
     fields: [
       {
-        name: "youtubeUrl",
+        name: "email",
+        label: "Email",
+        type: "email",
+        placeholder: "jane@example.com",
+        required: true,
+      },
+      {
+        name: "youtube_url",
         label: "YouTube URL",
         type: "url",
         placeholder: "https://www.youtube.com/watch?v=...",
         required: true,
       },
     ],
-    outputKeys: ["linkedinPost", "twitterThread", "blogDraft"],
+    outputKeys: ["message"],
   },
   {
     id: "lead-auto-reply",
