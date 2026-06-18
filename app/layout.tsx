@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shinka AI Playground",
+  title: "Shinka-6c Playground",
   description: "AI Agents Hub — run powerful agents with one click",
 };
 
@@ -37,16 +37,14 @@ export default function RootLayout({
                 href="/"
                 className="flex items-center gap-2 text-xl font-bold tracking-tight transition-opacity hover:opacity-80"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-white shadow-[0_0_15px_rgba(99,102,241,0.5)]">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg shadow-[0_0_15px_rgba(99,102,241,0.5)] overflow-hidden">
+                  <img src="/logo.png" alt="Shinka-6c Logo" className="h-full w-full object-cover" />
                 </div>
-                Shinka <span className="text-accent">AI</span>
+                Shinka<span className="text-accent">-6c</span>
               </Link>
               <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
                 <Link href="/" className="hover:text-foreground transition-colors">Agents</Link>
-                <Link href="#" className="hover:text-foreground transition-colors">Documentation</Link>
+                <a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Documentation</a>
                 <Link href="#" className="hover:text-foreground transition-colors">Pricing</Link>
               </nav>
               <div className="flex items-center gap-4">
@@ -72,8 +70,8 @@ export default function RootLayout({
                 <div>
                   <h4 className="font-semibold text-foreground mb-4">Resources</h4>
                   <ul className="space-y-2 text-sm text-muted">
-                    <li><a href="#" className="hover:text-accent transition-colors">Documentation</a></li>
-                    <li><a href="#" className="hover:text-accent transition-colors">API Reference</a></li>
+                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">Workflow Documentation</a></li>
+                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">Sample Outputs</a></li>
                     <li><a href="#" className="hover:text-accent transition-colors">Community</a></li>
                   </ul>
                 </div>
@@ -94,7 +92,7 @@ export default function RootLayout({
                 </div>
               </div>
               <div className="flex flex-col md:flex-row items-center justify-between border-t border-white/5 pt-8 text-sm text-muted">
-                <p>© {new Date().getFullYear()} Shinka AI Automation. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Shinka-6c Automation. All rights reserved.</p>
                 <div className="flex gap-4 mt-4 md:mt-0">
                   <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse mt-1.5"></div>
                   <span>All systems operational</span>

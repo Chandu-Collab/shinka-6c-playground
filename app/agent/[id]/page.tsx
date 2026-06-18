@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: AgentPageProps) {
   const agent = getAgentById(id);
   if (!agent) return { title: "Agent Not Found" };
   return {
-    title: `${agent.name} | Shinka AI Playground`,
+    title: `${agent.name} | Shinka-6c Playground`,
     description: agent.description,
   };
 }
