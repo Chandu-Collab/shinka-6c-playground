@@ -5,6 +5,8 @@ const WEBHOOK_URLS: Record<string, string | undefined> = {
   "youtube-repurposer": process.env.N8N_YOUTUBE_WEBHOOK_URL,
   "lead-auto-reply": process.env.N8N_LEAD_REPLY_WEBHOOK_URL,
   "resume-job-matcher": process.env.N8N_JOB_MATCHER_WEBHOOK_URL,
+  "multilingual-support": process.env.N8N_SUPPORT_WEBHOOK_URL,
+  "business-insights": process.env.N8N_INSIGHTS_WEBHOOK_URL,
 };
 
 function getWebhookUrl(agentId: string): string {
@@ -41,6 +43,18 @@ function generateMockResponse(
     };
   }
 
+  if (agentId === "multilingual-support") {
+    return {
+      message: "Your support query has been translated, classified, and an auto-reply or escalation notice has been sent to your email. (Mock response)",
+    };
+  }
+
+  if (agentId === "business-insights") {
+    return {
+      reportStatus: "Daily business report generated successfully. Alerts and insights have been emailed. (Mock response)",
+    };
+  }
+
   return { result: "Mock response generated successfully." };
 }
 
@@ -49,7 +63,7 @@ export async function callWebhook(
   payload: Record<string, unknown>
 ): Promise<WebhookResult> {
   const webhookUrl = getWebhookUrl(agent.id);
-  if (!webhookUrl) {
+  if (!webhookUrl || webhookUrl.includes("YOUR_N8N_URL")) {
     await new Promise((resolve) => setTimeout(resolve, 1200));
     return {
       success: true,

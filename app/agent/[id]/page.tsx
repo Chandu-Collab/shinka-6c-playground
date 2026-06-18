@@ -2,6 +2,9 @@ import AgentRunner from "@/components/AgentRunner";
 import LeadCaptureUI from "@/components/LeadCaptureUI";
 import JobMatchingUI from "@/components/JobMatchingUI";
 import YoutubeRepurposerUI from "@/components/YoutubeRepurposerUI";
+import MultilingualSupportUI from "@/components/MultilingualSupportUI";
+import BusinessInsightsUI from "@/components/BusinessInsightsUI";
+import DocViewer from "@/components/DocViewer";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,7 +23,7 @@ export async function generateMetadata({ params }: AgentPageProps) {
   const agent = getAgentById(id);
   if (!agent) return { title: "Agent Not Found" };
   return {
-    title: `${agent.name} | Shinka AI Playground`,
+    title: `${agent.name} | Shinka-6c Playground`,
     description: agent.description,
   };
 }
@@ -49,7 +52,9 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <h1 className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
           {agent.name}
         </h1>
-        <p className="max-w-2xl text-muted">{agent.description}</p>
+        <p className="max-w-2xl text-muted mb-4">{agent.description}</p>
+
+        {agent.docPath && <DocViewer docPath={agent.docPath} />}
       </div>
 
       {agent.id === "lead-auto-reply" ? (
@@ -58,6 +63,10 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <JobMatchingUI agent={agent} />
       ) : agent.id === "youtube-repurposer" ? (
         <YoutubeRepurposerUI agent={agent} />
+      ) : agent.id === "multilingual-support" ? (
+        <MultilingualSupportUI agent={agent} />
+      ) : agent.id === "business-insights" ? (
+        <BusinessInsightsUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}

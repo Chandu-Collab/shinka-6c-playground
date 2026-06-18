@@ -41,3 +41,12 @@ next-env.d.ts
 
 # workflow configs
 components/agents/*.json
+*(n8n)*.json
+*n8n*.json
+
+# specific agent exports (if dropped in root)
+"AI Business Insights*.json"
+"Multilingual AI*.json"
+"AI Lead Capture*.json"
+"AI Resume*.json"
+"AI YouTube*.json"
