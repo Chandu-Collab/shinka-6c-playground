@@ -6,6 +6,7 @@ const WEBHOOK_URLS: Record<string, string | undefined> = {
   "lead-auto-reply": process.env.N8N_LEAD_REPLY_WEBHOOK_URL,
   "resume-job-matcher": process.env.N8N_JOB_MATCHER_WEBHOOK_URL,
   "multilingual-support": process.env.N8N_SUPPORT_WEBHOOK_URL,
+  "business-insights": process.env.N8N_INSIGHTS_WEBHOOK_URL,
 };
 
 function getWebhookUrl(agentId: string): string {
@@ -45,6 +46,12 @@ function generateMockResponse(
   if (agentId === "multilingual-support") {
     return {
       message: "Your support query has been translated, classified, and an auto-reply or escalation notice has been sent to your email. (Mock response)",
+    };
+  }
+
+  if (agentId === "business-insights") {
+    return {
+      reportStatus: "Daily business report generated successfully. Alerts and insights have been emailed. (Mock response)",
     };
   }
 

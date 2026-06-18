@@ -138,6 +138,16 @@ export const agents: Agent[] = [
     ],
     outputKeys: ["message"],
   },
+  {
+    id: "business-insights",
+    name: "AI Business Insights & Alert System",
+    description:
+      "Automated growth analyst. Generates daily reports, detects revenue drops, and alerts you to pipeline issues.",
+    route: "/agent/business-insights",
+    icon: "📊",
+    fields: [],
+    outputKeys: [],
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {

@@ -3,6 +3,7 @@ import LeadCaptureUI from "@/components/LeadCaptureUI";
 import JobMatchingUI from "@/components/JobMatchingUI";
 import YoutubeRepurposerUI from "@/components/YoutubeRepurposerUI";
 import MultilingualSupportUI from "@/components/MultilingualSupportUI";
+import BusinessInsightsUI from "@/components/BusinessInsightsUI";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -61,6 +62,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <YoutubeRepurposerUI agent={agent} />
       ) : agent.id === "multilingual-support" ? (
         <MultilingualSupportUI agent={agent} />
+      ) : agent.id === "business-insights" ? (
+        <BusinessInsightsUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}
