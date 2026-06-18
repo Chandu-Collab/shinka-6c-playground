@@ -72,6 +72,32 @@ export const agents: Agent[] = [
     ],
     outputKeys: ["reply"],
   },
+  {
+    id: "resume-job-matcher",
+    name: "AI Resume-Based Job Matcher",
+    description:
+      "Paste your resume and let our AI analyze your skills to find the perfect remote jobs for you.",
+    route: "/agent/resume-job-matcher",
+    icon: "🚀",
+    fields: [
+      {
+        name: "email",
+        label: "Email",
+        type: "email",
+        placeholder: "jane@example.com",
+        required: true,
+      },
+      {
+        name: "resumeText",
+        label: "Resume Content",
+        type: "textarea",
+        placeholder: "Paste your full resume text here...",
+        required: true,
+        rows: 10,
+      },
+    ],
+    outputKeys: ["message"],
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {

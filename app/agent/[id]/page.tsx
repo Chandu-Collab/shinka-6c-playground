@@ -1,5 +1,6 @@
 import AgentRunner from "@/components/AgentRunner";
 import LeadCaptureUI from "@/components/LeadCaptureUI";
+import JobMatchingUI from "@/components/JobMatchingUI";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -52,6 +53,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
 
       {agent.id === "lead-auto-reply" ? (
         <LeadCaptureUI agent={agent} />
+      ) : agent.id === "resume-job-matcher" ? (
+        <JobMatchingUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}

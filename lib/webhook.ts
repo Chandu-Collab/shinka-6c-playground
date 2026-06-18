@@ -4,6 +4,7 @@ import { getAgentById } from "@/data/agents";
 const WEBHOOK_URLS: Record<string, string | undefined> = {
   "youtube-repurposer": process.env.N8N_YOUTUBE_WEBHOOK_URL,
   "lead-auto-reply": process.env.N8N_LEAD_REPLY_WEBHOOK_URL,
+  "resume-job-matcher": process.env.N8N_JOB_MATCHER_WEBHOOK_URL,
 };
 
 function getWebhookUrl(agentId: string): string {
@@ -34,6 +35,12 @@ function generateMockResponse(
     const message = String(payload.message ?? "your inquiry");
     return {
       reply: `Hi ${name},\n\nThank you for reaching out! I really appreciate you taking the time to share your thoughts.\n\nRegarding "${message.slice(0, 80)}${message.length > 80 ? "..." : ""}" — I'd love to help. Based on what you've shared, I think a quick 15-minute call would be the best next step so we can understand your needs and explore how we can support you.\n\nWould any of these times work for you?\n• Tuesday 2:00 PM\n• Wednesday 10:00 AM\n• Thursday 4:00 PM\n\nLooking forward to connecting!\n\nBest regards`,
+    };
+  }
+
+  if (agentId === "resume-job-matcher") {
+    return {
+      message: "Job matches are being processed and will be sent to your email shortly. (Mock response)"
     };
   }
 
