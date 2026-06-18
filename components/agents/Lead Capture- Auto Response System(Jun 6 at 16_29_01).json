@@ -1,0 +1,1488 @@
+{
+  "updatedAt": "2026-06-07T11:13:25.341Z",
+  "createdAt": "2026-06-05T08:30:28.741Z",
+  "id": "QJuF5L7xYAo60fXx",
+  "name": "Lead Capture- Auto Response System",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-capture",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ccbbd005-ce0c-44ed-8ab9-7d5a57dbfc1c",
+      "name": "Webhook",
+      "webhookId": "93be7426-fc23-4626-807d-d5d9011cd457"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fb0cc939-85dd-47e9-ad62-ba8d71482fb6",
+              "name": "name",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "cffe2945-5d3f-4ae0-b19c-45ebbcae810d",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "addc2f37-e318-4bdc-93e1-3d518a5427e5",
+              "name": "message",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "d7a75025-cfc8-4d81-9dcc-db8d55488ff5",
+              "name": "created_at",
+              "value": "={{$now}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a0ed9597-8d34-4e18-83c0-696dd18ce951",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  id: Date.now(),\n  name: $json.name,\n  email: $json.email,\n  message: $json.message,\n  created_at: $json.created_at\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        -96
+      ],
+      "id": "41e2e96e-ad50-4fde-8e52-54b53ece1369",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  response_id: Date.now(),\n  lead_id: $json.id,\n  name: $json.name,\n  email: $json.email,\n  message: $json.message,\n  ai_response: $json.output,\n  status: \"pending\",\n  created_at: new Date()\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        0
+      ],
+      "id": "52ff6868-1c4c-4a99-8346-4d5493b9dbaa",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Thanks for reaching out!",
+        "emailType": "text",
+        "message": "={{ $json.ai_response }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1888,
+        0
+      ],
+      "id": "a9d6df2a-1ad1-4a98-83e0-51c3dede151e",
+      "name": "Send a message",
+      "webhookId": "a2d1ebb2-002d-48e9-9439-ef40bac9a903",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "dJo19xe1bVod4Y6k",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I",
+          "mode": "list",
+          "cachedResultName": "Day-1 N8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        0
+      ],
+      "id": "72948474-ee24-4e5d-b198-61547903abcc",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XUo0YZXw282TEr36",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User Name: {{$json.name}}\nUser Message: {{$json.message}}\n\nWrite a reply:\n- Acknowledge the message\n- Be friendly and professional\n- Ask for next step (call/demo)\n- Keep under 80 words",
+        "options": {
+          "systemMessage": "You are a professional business assistant.\nReply politely and clearly to potential clients.\nKeep responses short and helpful."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        896,
+        0
+      ],
+      "id": "b5f76197-2558-497e-8bb4-3248582cba01",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-20b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-20b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        880,
+        208
+      ],
+      "id": "e439e408-9435-4b6f-9001-a8d1b68b3e93",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "ElpSuTJcjmLFzmqr",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1232,
+        -112
+      ],
+      "id": "3cfe4018-ef35-44cb-ae87-1ddcb8474941",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I",
+          "mode": "list",
+          "cachedResultName": "Day-1 N8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 372230663,
+          "mode": "list",
+          "cachedResultName": "Responses",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit#gid=372230663"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "response_id",
+              "displayName": "response_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ai_response",
+              "displayName": "ai_response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1680,
+        0
+      ],
+      "id": "0ef46f3d-b025-4949-bb1a-f5d3ea7ee9fd",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XUo0YZXw282TEr36",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I",
+          "mode": "list",
+          "cachedResultName": "Day-1 N8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 372230663,
+          "mode": "list",
+          "cachedResultName": "Responses",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit#gid=372230663"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "response_id": "={{ $json.response_id }}",
+            "status": "sent"
+          },
+          "matchingColumns": [
+            "response_id"
+          ],
+          "schema": [
+            {
+              "id": "response_id",
+              "displayName": "response_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ai_response",
+              "displayName": "ai_response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2128,
+        -16
+      ],
+      "id": "73eb1901-f79f-4269-9c3a-63e9261bcb2e",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XUo0YZXw282TEr36",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1872,
+        -192
+      ],
+      "id": "4d4c0be4-e32a-4575-be28-bebe7e0f8d28",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "content": "Setup Instructions:\n1. Add your OpenAI API key\n2. Connect Google Sheets\n3. Configure Gmail credentials\n4. Activate workflow"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "04a7c491-7cdc-4a49-86d4-4a0c18d474e3",
+      "name": "Sticky Note"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "saveDataErrorExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "pinData": {},
+  "versionId": "7c7436fb-c39a-434c-a249-2be7a1c77d0a",
+  "activeVersionId": "7c7436fb-c39a-434c-a249-2be7a1c77d0a",
+  "versionCounter": 125,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-06-05T08:30:28.753Z",
+      "createdAt": "2026-06-05T08:30:28.753Z",
+      "role": "workflow:owner",
+      "workflowId": "QJuF5L7xYAo60fXx",
+      "projectId": "loWf0mBs1xKuh5N3",
+      "project": {
+        "updatedAt": "2026-06-04T07:55:05.260Z",
+        "createdAt": "2026-06-04T07:52:41.897Z",
+        "id": "loWf0mBs1xKuh5N3",
+        "name": "Chandu M <chandouqiande@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "8d994dc9-eaab-443f-93bf-ef4aa823f36d"
+      }
+    }
+  ],
+  "tags": [],
+  "parentFolder": null,
+  "activeVersion": {
+    "updatedAt": "2026-06-06T10:59:20.000Z",
+    "createdAt": "2026-06-06T10:59:01.333Z",
+    "versionId": "7c7436fb-c39a-434c-a249-2be7a1c77d0a",
+    "workflowId": "QJuF5L7xYAo60fXx",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "lead-capture",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "ccbbd005-ce0c-44ed-8ab9-7d5a57dbfc1c",
+        "name": "Webhook",
+        "webhookId": "93be7426-fc23-4626-807d-d5d9011cd457"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fb0cc939-85dd-47e9-ad62-ba8d71482fb6",
+                "name": "name",
+                "value": "={{ $json.body.name }}",
+                "type": "string"
+              },
+              {
+                "id": "cffe2945-5d3f-4ae0-b19c-45ebbcae810d",
+                "name": "email",
+                "value": "={{ $json.body.email }}",
+                "type": "string"
+              },
+              {
+                "id": "addc2f37-e318-4bdc-93e1-3d518a5427e5",
+                "name": "message",
+                "value": "={{ $json.body.message }}",
+                "type": "string"
+              },
+              {
+                "id": "d7a75025-cfc8-4d81-9dcc-db8d55488ff5",
+                "name": "created_at",
+                "value": "={{$now}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          208,
+          0
+        ],
+        "id": "a0ed9597-8d34-4e18-83c0-696dd18ce951",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "return {\n  id: Date.now(),\n  name: $json.name,\n  email: $json.email,\n  message: $json.message,\n  created_at: $json.created_at\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          432,
+          -96
+        ],
+        "id": "41e2e96e-ad50-4fde-8e52-54b53ece1369",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "return {\n  response_id: Date.now(),\n  lead_id: $json.id,\n  name: $json.name,\n  email: $json.email,\n  message: $json.message,\n  ai_response: $json.output,\n  status: \"pending\",\n  created_at: new Date()\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1472,
+          0
+        ],
+        "id": "52ff6868-1c4c-4a99-8346-4d5493b9dbaa",
+        "name": "Code in JavaScript1"
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.email }}",
+          "subject": "Thanks for reaching out!",
+          "emailType": "text",
+          "message": "={{ $json.ai_response }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          1888,
+          0
+        ],
+        "id": "a9d6df2a-1ad1-4a98-83e0-51c3dede151e",
+        "name": "Send a message",
+        "webhookId": "a2d1ebb2-002d-48e9-9439-ef40bac9a903",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "dJo19xe1bVod4Y6k",
+            "name": "Gmail account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I",
+            "mode": "list",
+            "cachedResultName": "Day-1 N8n",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Sheet1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "autoMapInputData",
+            "value": {},
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "message",
+                "displayName": "message",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          672,
+          0
+        ],
+        "id": "72948474-ee24-4e5d-b198-61547903abcc",
+        "name": "Append row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "XUo0YZXw282TEr36",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=User Name: {{$json.name}}\nUser Message: {{$json.message}}\n\nWrite a reply:\n- Acknowledge the message\n- Be friendly and professional\n- Ask for next step (call/demo)\n- Keep under 80 words",
+          "options": {
+            "systemMessage": "You are a professional business assistant.\nReply politely and clearly to potential clients.\nKeep responses short and helpful."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          896,
+          0
+        ],
+        "id": "b5f76197-2558-497e-8bb4-3248582cba01",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "openai/gpt-oss-20b",
+            "mode": "list",
+            "cachedResultName": "openai/gpt-oss-20b"
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          880,
+          208
+        ],
+        "id": "e439e408-9435-4b6f-9001-a8d1b68b3e93",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "ElpSuTJcjmLFzmqr",
+            "name": "OpenAI account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineByPosition",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          1232,
+          -112
+        ],
+        "id": "3cfe4018-ef35-44cb-ae87-1ddcb8474941",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I",
+            "mode": "list",
+            "cachedResultName": "Day-1 N8n",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 372230663,
+            "mode": "list",
+            "cachedResultName": "Responses",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit#gid=372230663"
+          },
+          "columns": {
+            "mappingMode": "autoMapInputData",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "response_id",
+                "displayName": "response_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "lead_id",
+                "displayName": "lead_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "message",
+                "displayName": "message",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "ai_response",
+                "displayName": "ai_response",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1680,
+          0
+        ],
+        "id": "0ef46f3d-b025-4949-bb1a-f5d3ea7ee9fd",
+        "name": "Append row in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "XUo0YZXw282TEr36",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I",
+            "mode": "list",
+            "cachedResultName": "Day-1 N8n",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 372230663,
+            "mode": "list",
+            "cachedResultName": "Responses",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mtwHaLu88xuScoYJD-ylPbTLA-DNhZNIbY9et14L35I/edit#gid=372230663"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "response_id": "={{ $json.response_id }}",
+              "status": "sent"
+            },
+            "matchingColumns": [
+              "response_id"
+            ],
+            "schema": [
+              {
+                "id": "response_id",
+                "displayName": "response_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "lead_id",
+                "displayName": "lead_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "message",
+                "displayName": "message",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "ai_response",
+                "displayName": "ai_response",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          2128,
+          -16
+        ],
+        "id": "73eb1901-f79f-4269-9c3a-63e9261bcb2e",
+        "name": "Update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "XUo0YZXw282TEr36",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineByPosition",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          1872,
+          -192
+        ],
+        "id": "4d4c0be4-e32a-4575-be28-bebe7e0f8d28",
+        "name": "Merge1"
+      },
+      {
+        "parameters": {
+          "content": "Setup Instructions:\n1. Add your OpenAI API key\n2. Connect Google Sheets\n3. Configure Gmail credentials\n4. Activate workflow"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          368,
+          -352
+        ],
+        "typeVersion": 1,
+        "id": "04a7c491-7cdc-4a49-86d4-4a0c18d474e3",
+        "name": "Sticky Note"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet1",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Merge1",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Append row in sheet": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Append row in sheet1": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row in sheet": {
+        "main": [
+          []
+        ]
+      },
+      "Merge1": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "Chandu M",
+    "name": "v1.0 - AI Lead Auto Response System",
+    "description": "This workflow captures incoming leads via webhook, generates an AI-powered response, stores both lead data and responses in Google Sheets, and sends an automated email reply instantly.\n\nFeatures:\n• Real-time lead capture\n• AI-generated personalized responses\n• Response logging for audit and safety\n• Automated email delivery\n• Status tracking (pending/sent/failed)\n\nUse Case:\nHelps businesses respond to leads instantly, reducing response time and preventing lost opportunities.\n\nBuilt as part of a real-world AI automation series (Day 1).\n",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-06-06T10:59:20.211Z",
+        "id": 3,
+        "workflowId": "QJuF5L7xYAo60fXx",
+        "versionId": "7c7436fb-c39a-434c-a249-2be7a1c77d0a",
+        "event": "activated",
+        "userId": "8d994dc9-eaab-443f-93bf-ef4aa823f36d"
+      },
+      {
+        "createdAt": "2026-06-07T11:13:25.532Z",
+        "id": 5,
+        "workflowId": "QJuF5L7xYAo60fXx",
+        "versionId": "7c7436fb-c39a-434c-a249-2be7a1c77d0a",
+        "event": "activated",
+        "userId": "8d994dc9-eaab-443f-93bf-ef4aa823f36d"
+      },
+      {
+        "createdAt": "2026-06-07T11:13:25.486Z",
+        "id": 4,
+        "workflowId": "QJuF5L7xYAo60fXx",
+        "versionId": "7c7436fb-c39a-434c-a249-2be7a1c77d0a",
+        "event": "deactivated",
+        "userId": "8d994dc9-eaab-443f-93bf-ef4aa823f36d"
+      }
+    ]
+  },
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "checksum": "dd9c63071e93dd5eede6033fd8948c404c5307199ee0a8928f681559e8c21307"
+}
