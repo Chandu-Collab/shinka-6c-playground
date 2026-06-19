@@ -105,7 +105,7 @@ export default function AboutPage() {
 
           <hr className="border-white/10 my-8" />
 
-          <p className="mb-8 font-medium italic">Shinka-6c is not just a tool — it's an evolving platform to help you experience and benefit from AI in the simplest way possible.</p>
+          <p className="mb-8 font-medium italic">Shinka-6c is not just a tool — it&apos;s an evolving platform to help you experience and benefit from AI in the simplest way possible.</p>
         </div>
       </div>
     </div>

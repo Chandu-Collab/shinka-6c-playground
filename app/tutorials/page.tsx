@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function TutorialsPage() {
   return (
     <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden py-20">
@@ -9,11 +11,11 @@ export default function TutorialsPage() {
         </div>
         <h1 className="text-4xl font-bold tracking-tight mb-4">Tutorials Coming Soon</h1>
         <p className="text-lg text-muted max-w-md mx-auto mb-8">
-          We're working hard to bring you comprehensive video guides and step-by-step written tutorials. Check back soon!
+          We&apos;re working hard to bring you comprehensive video guides and step-by-step written tutorials. Check back soon!
         </p>
-        <a href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-medium hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20">
+        <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-medium hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20">
           Return Home
-        </a>
+        </Link>
       </div>
     </div>
   );
