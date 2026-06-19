@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = ".next"
 
-# The following ensures Netlify uses the correct Node version
+# Ensure Netlify uses the correct Node version
 [build.environment]
   NODE_VERSION = "20"
+
+# Explicitly configure the Next.js plugin
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
