@@ -8,7 +8,7 @@ export default function PrivacyPage() {
         <h1 className="text-4xl font-bold mb-8 tracking-tight">Privacy Policy</h1>
         <div className="prose prose-invert prose-sm sm:prose-base text-muted max-w-none">
           <p className="text-sm opacity-80 mb-8"><strong>Effective Date:</strong> June 19, 2026</p>
-          <p className="mb-8">Welcome to <strong>Shinka-6c Playground</strong> ("we", "our", or "us"). This Privacy Policy explains how we collect, use, and protect your information when you use our platform.</p>
+          <p className="mb-8">Welcome to <strong>Shinka-6c Playground</strong> (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;). This Privacy Policy explains how we collect, use, and protect your information when you use our platform.</p>
           
           <hr className="border-white/10 my-8" />
           
