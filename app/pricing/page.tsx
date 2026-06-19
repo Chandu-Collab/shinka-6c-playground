@@ -57,7 +57,7 @@ export default function PricingPage() {
           <div className="p-8 rounded-3xl border border-white/5 bg-surface/50 backdrop-blur-sm hover:border-white/10 transition-colors">
             <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">🔵 Custom</h3>
             <p className="text-sm text-muted mb-6 h-10">Need something tailored for your business?</p>
-            <div className="text-3xl font-bold mb-6 flex items-center h-[40px]">Let's Talk</div>
+            <div className="text-3xl font-bold mb-6 flex items-center h-[40px]">Let&apos;s Talk</div>
             <ul className="space-y-4 mb-8 text-muted text-sm">
               <li className="flex items-start gap-3"><div className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div> Custom AI agents</li>
               <li className="flex items-start gap-3"><div className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div> Workflow automation</li>

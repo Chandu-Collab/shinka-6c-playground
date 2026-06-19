@@ -188,7 +188,7 @@ Skills: React, Next.js, Node.js..."
                 Match Complete!
               </h3>
               <p className="text-green-800 dark:text-green-400">
-                We've analyzed your resume and found matching jobs. A personalized list with AI-generated explanations has been sent to <strong>{formData.email}</strong>.
+                We&apos;ve analyzed your resume and found matching jobs. A personalized list with AI-generated explanations has been sent to <strong>{formData.email}</strong>.
               </p>
               <div className="mt-8 rounded-xl bg-white/50 p-4 text-sm font-medium text-green-900 dark:bg-black/20 dark:text-green-300">
                 Please check your inbox (and spam folder) in the next few minutes.
