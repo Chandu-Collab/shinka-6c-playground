@@ -1,4 +1,51 @@
+"use client";
+
+import { useState } from "react";
+
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+    setSuccess(false);
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const requestType = formData.get("requestType");
+    const message = formData.get("message");
+
+    if (!name || !email || !requestType || !message) {
+      setError("All fields are required.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, requestType, message }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to submit request.");
+      }
+
+      setSuccess(true);
+      (e.target as HTMLFormElement).reset();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -80,26 +127,37 @@ export default function ContactPage() {
               <p className="text-muted">Fill out the form below and we’ll get back to you as soon as possible.</p>
             </div>
 
-            <form className="space-y-6 relative">
+            <form onSubmit={handleSubmit} className="space-y-6 relative">
+              {error && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm">
+                  {error}
+                </div>
+              )}
+              {success && (
+                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-sm">
+                  Thanks! We&apos;ve received your message and will be in touch soon.
+                </div>
+              )}
+
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Name</label>
-                <input type="text" className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all" placeholder="Your name" />
+                <input name="name" type="text" disabled={isSubmitting} className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all disabled:opacity-50" placeholder="Your name" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Email</label>
-                <input type="email" className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all" placeholder="you@example.com" />
+                <input name="email" type="email" disabled={isSubmitting} className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all disabled:opacity-50" placeholder="you@example.com" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Type of Request</label>
                 <div className="relative">
-                  <select defaultValue="" className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all text-muted appearance-none cursor-pointer">
+                  <select name="requestType" defaultValue="" disabled={isSubmitting} className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all text-muted appearance-none cursor-pointer disabled:opacity-50">
                     <option value="" disabled hidden>Select a request type...</option>
-                    <option value="general" className="bg-surface-elevated text-foreground">General Inquiry</option>
-                    <option value="new_agent" className="bg-surface-elevated text-foreground">Request a New Agent</option>
-                    <option value="custom" className="bg-surface-elevated text-foreground">Custom Automation</option>
-                    <option value="bug" className="bg-surface-elevated text-foreground">Bug / Issue</option>
+                    <option value="General Inquiry" className="bg-surface-elevated text-foreground">General Inquiry</option>
+                    <option value="Agent Request" className="bg-surface-elevated text-foreground">Request a New Agent</option>
+                    <option value="Custom Automation" className="bg-surface-elevated text-foreground">Custom Automation</option>
+                    <option value="Bug Report" className="bg-surface-elevated text-foreground">Bug / Issue</option>
                   </select>
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -109,11 +167,11 @@ export default function ContactPage() {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Message</label>
-                <textarea rows={5} className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all resize-none" placeholder="Tell us more about what you need..."></textarea>
+                <textarea name="message" rows={5} disabled={isSubmitting} className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all resize-none disabled:opacity-50" placeholder="Tell us more about what you need..."></textarea>
               </div>
 
-              <button type="button" className="w-full py-4 mt-2 rounded-xl bg-accent text-white font-semibold hover:bg-accent-hover transition-all hover:-translate-y-0.5 shadow-lg shadow-accent/25">
-                Submit Request
+              <button type="submit" disabled={isSubmitting} className="w-full py-4 mt-2 rounded-xl bg-accent text-white font-semibold hover:bg-accent-hover transition-all hover:-translate-y-0.5 shadow-lg shadow-accent/25 disabled:opacity-50 disabled:hover:translate-y-0">
+                {isSubmitting ? "Submitting..." : "Submit Request"}
               </button>
             </form>
           </div>
