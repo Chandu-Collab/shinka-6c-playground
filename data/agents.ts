@@ -154,6 +154,57 @@ export const agents: Agent[] = [
     outputKeys: [],
     docPath: "/docs/AI Business Insights & Alert Agent.pdf",
   },
+  {
+    id: "instagram-dm-lead",
+    name: "AI Instagram DM → Lead Capture",
+    description:
+      "Automated lead qualification from Instagram DMs. Analyzes intent, scores leads (Hot/Warm/Cold), and syncs to Google Sheets.",
+    route: "/agent/instagram-dm-lead",
+    icon: "📸",
+    fields: [
+      {
+        name: "username",
+        label: "Instagram Username",
+        type: "text",
+        placeholder: "johndoe",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Email Address",
+        type: "email",
+        placeholder: "john@example.com",
+        required: true,
+      },
+      {
+        name: "message",
+        label: "Direct Message",
+        type: "textarea",
+        placeholder: "Hey, what are your prices?",
+        required: true,
+        rows: 4,
+      },
+    ],
+    outputKeys: ["intent", "lead_score", "summary"],
+    docPath: "/docs/AI Instagram DM Lead Capture Guide.pdf",
+  },
+  {
+    id: "order-priority",
+    name: "AI Order Priority & Notification System",
+    description:
+      "Automated order prioritization engine. Classifies incoming orders as High, Medium, or Low priority based on value and delivery type.",
+    route: "/agent/order-priority",
+    icon: "📦",
+    fields: [
+      { name: "order_id", label: "Order ID", type: "text", placeholder: "ORD-12345", required: true },
+      { name: "customer_name", label: "Customer Name", type: "text", placeholder: "Alice Smith", required: true },
+      { name: "email", label: "Customer Email", type: "email", placeholder: "alice@example.com", required: true },
+      { name: "order_value", label: "Order Value ($)", type: "text", placeholder: "150", required: true },
+      { name: "delivery_type", label: "Delivery Type", type: "text", placeholder: "standard", required: true },
+    ],
+    outputKeys: ["priority", "reason"],
+    docPath: "/docs/AI Order Priority & Notification System.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {

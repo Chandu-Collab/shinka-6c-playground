@@ -7,6 +7,8 @@ const WEBHOOK_URLS: Record<string, string | undefined> = {
   "resume-job-matcher": process.env.N8N_JOB_MATCHER_WEBHOOK_URL,
   "multilingual-support": process.env.N8N_SUPPORT_WEBHOOK_URL,
   "business-insights": process.env.N8N_INSIGHTS_WEBHOOK_URL,
+  "instagram-dm-lead": process.env.N8N_INSTAGRAM_WEBHOOK_URL,
+  "order-priority": process.env.N8N_ORDER_WEBHOOK_URL,
 };
 
 function getWebhookUrl(agentId: string): string {
@@ -52,6 +54,21 @@ function generateMockResponse(
   if (agentId === "business-insights") {
     return {
       reportStatus: "Daily business report generated successfully. Alerts and insights have been emailed. (Mock response)",
+    };
+  }
+
+  if (agentId === "instagram-dm-lead") {
+    return {
+      intent: "enquiry",
+      lead_score: "warm",
+      summary: "Mock summary of the Instagram message. The actual webhook would classify this automatically.",
+    };
+  }
+
+  if (agentId === "order-priority") {
+    return {
+      priority: "High",
+      reason: "Mock classification: Order was processed successfully.",
     };
   }
 
