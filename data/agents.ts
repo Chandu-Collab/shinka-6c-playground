@@ -188,6 +188,23 @@ export const agents: Agent[] = [
     outputKeys: ["intent", "lead_score", "summary"],
     docPath: "/docs/AI Instagram DM → Lead Capture & Qualification System (n8n)(Jun 20 at 00_13_05).json",
   },
+  {
+    id: "order-priority",
+    name: "AI Order Priority & Notification System",
+    description:
+      "Automated order prioritization engine. Classifies incoming orders as High, Medium, or Low priority based on value and delivery type.",
+    route: "/agent/order-priority",
+    icon: "📦",
+    fields: [
+      { name: "order_id", label: "Order ID", type: "text", placeholder: "ORD-12345", required: true },
+      { name: "customer_name", label: "Customer Name", type: "text", placeholder: "Alice Smith", required: true },
+      { name: "email", label: "Customer Email", type: "email", placeholder: "alice@example.com", required: true },
+      { name: "order_value", label: "Order Value ($)", type: "text", placeholder: "150", required: true },
+      { name: "delivery_type", label: "Delivery Type", type: "text", placeholder: "standard", required: true },
+    ],
+    outputKeys: ["priority", "reason"],
+    docPath: "/docs/AI Order Priority & Notification System(Jun 22 at 17_46_55).json",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
