@@ -4,6 +4,7 @@ import JobMatchingUI from "@/components/JobMatchingUI";
 import YoutubeRepurposerUI from "@/components/YoutubeRepurposerUI";
 import MultilingualSupportUI from "@/components/MultilingualSupportUI";
 import BusinessInsightsUI from "@/components/BusinessInsightsUI";
+import InstagramDMUI from "@/components/InstagramDMUI";
 import DocViewer from "@/components/DocViewer";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
@@ -67,6 +68,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <MultilingualSupportUI agent={agent} />
       ) : agent.id === "business-insights" ? (
         <BusinessInsightsUI agent={agent} />
+      ) : agent.id === "instagram-dm-lead" ? (
+        <InstagramDMUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}

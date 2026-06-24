@@ -154,6 +154,40 @@ export const agents: Agent[] = [
     outputKeys: [],
     docPath: "/docs/AI Business Insights & Alert Agent.pdf",
   },
+  {
+    id: "instagram-dm-lead",
+    name: "AI Instagram DM → Lead Capture",
+    description:
+      "Automated lead qualification from Instagram DMs. Analyzes intent, scores leads (Hot/Warm/Cold), and syncs to Google Sheets.",
+    route: "/agent/instagram-dm-lead",
+    icon: "📸",
+    fields: [
+      {
+        name: "username",
+        label: "Instagram Username",
+        type: "text",
+        placeholder: "johndoe",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Email Address",
+        type: "email",
+        placeholder: "john@example.com",
+        required: true,
+      },
+      {
+        name: "message",
+        label: "Direct Message",
+        type: "textarea",
+        placeholder: "Hey, what are your prices?",
+        required: true,
+        rows: 4,
+      },
+    ],
+    outputKeys: ["intent", "lead_score", "summary"],
+    docPath: "/docs/AI Instagram DM → Lead Capture & Qualification System (n8n)(Jun 20 at 00_13_05).json",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
