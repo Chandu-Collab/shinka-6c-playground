@@ -9,6 +9,8 @@ const WEBHOOK_URLS: Record<string, string | undefined> = {
   "business-insights": process.env.N8N_INSIGHTS_WEBHOOK_URL,
   "instagram-dm-lead": process.env.N8N_INSTAGRAM_WEBHOOK_URL,
   "order-priority": process.env.N8N_ORDER_WEBHOOK_URL,
+  "meeting-notes-generator": process.env.N8N_MEETING_NOTES_WEBHOOK_URL || "https://scanning-overfeed-galley.ngrok-free.dev/webhook/meeting-notes-generator",
+  "cold-email-personalizer": process.env.N8N_COLD_EMAIL_WEBHOOK_URL || "https://scanning-overfeed-galley.ngrok-free.dev/webhook/cold-email-personalizer",
 };
 
 function getWebhookUrl(agentId: string): string {
@@ -69,6 +71,18 @@ function generateMockResponse(
     return {
       priority: "High",
       reason: "Mock classification: Order was processed successfully.",
+    };
+  }
+
+  if (agentId === "meeting-notes-generator") {
+    return {
+      message: "Meeting notes and action items are being generated. The summary will be sent to your email shortly.",
+    };
+  }
+
+  if (agentId === "cold-email-personalizer") {
+    return {
+      message: "The lead data is being analyzed. A personalized cold email is being generated and will be sent shortly.",
     };
   }
 

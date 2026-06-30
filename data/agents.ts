@@ -205,6 +205,94 @@ export const agents: Agent[] = [
     outputKeys: ["priority", "reason"],
     docPath: "/docs/AI Order Priority & Notification System.pdf",
   },
+  {
+    id: "meeting-notes-generator",
+    name: "AI Meeting Notes → Action Items Generator",
+    description:
+      "Analyze meeting transcripts and automatically extract meeting summaries, key decisions, and action items, then email the results.",
+    route: "/agent/meeting-notes-generator",
+    icon: "📝",
+    fields: [
+      {
+        name: "meetingTitle",
+        label: "Meeting Title",
+        type: "text",
+        placeholder: "Weekly Sync",
+        required: true,
+      },
+      {
+        name: "meetingDate",
+        label: "Meeting Date",
+        type: "text",
+        placeholder: "June 25, 2026",
+        required: true,
+      },
+      {
+        name: "participants",
+        label: "Participants",
+        type: "text",
+        placeholder: "John, Jane, Doe",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Email Address",
+        type: "email",
+        placeholder: "jane@example.com",
+        required: true,
+      },
+      {
+        name: "transcript",
+        label: "Transcript",
+        type: "textarea",
+        placeholder: "Paste the full meeting transcript here...",
+        required: true,
+        rows: 6,
+      },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI Meeting Notes & Action Items Generator.pdf",
+  },
+  {
+    id: "cold-email-personalizer",
+    name: "AI Cold Email Personalization Engine",
+    description:
+      "Automated research and personalization engine. Analyzes a lead's website and generates a highly personalized, human-sounding cold email.",
+    route: "/agent/cold-email-personalizer",
+    icon: "✉️",
+    fields: [
+      {
+        name: "name",
+        label: "Lead Name",
+        type: "text",
+        placeholder: "John Doe",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Lead Email Address",
+        type: "email",
+        placeholder: "john@example.com",
+        required: true,
+      },
+      {
+        name: "company",
+        label: "Company",
+        type: "text",
+        placeholder: "Acme Corp",
+        required: true,
+      },
+      {
+        name: "website",
+        label: "Website URL",
+        type: "url",
+        placeholder: "https://acme.com",
+        required: true,
+      },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI Cold Email Personalization Engine User Manual.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
