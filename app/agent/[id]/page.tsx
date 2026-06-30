@@ -7,6 +7,7 @@ import BusinessInsightsUI from "@/components/BusinessInsightsUI";
 import InstagramDMUI from "@/components/InstagramDMUI";
 import OrderPriorityUI from "@/components/OrderPriorityUI";
 import MeetingNotesGeneratorUI from "@/components/MeetingNotesGeneratorUI";
+import ColdEmailPersonalizerUI from "@/components/ColdEmailPersonalizerUI";
 import DocViewer from "@/components/DocViewer";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
@@ -76,6 +77,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <OrderPriorityUI agent={agent} />
       ) : agent.id === "meeting-notes-generator" ? (
         <MeetingNotesGeneratorUI agent={agent} />
+      ) : agent.id === "cold-email-personalizer" ? (
+        <ColdEmailPersonalizerUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}

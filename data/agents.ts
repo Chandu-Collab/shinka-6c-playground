@@ -253,6 +253,46 @@ export const agents: Agent[] = [
     outputKeys: ["message"],
     docPath: "/docs/AI Meeting Notes & Action Items Generator.pdf",
   },
+  {
+    id: "cold-email-personalizer",
+    name: "AI Cold Email Personalization Engine",
+    description:
+      "Automated research and personalization engine. Analyzes a lead's website and generates a highly personalized, human-sounding cold email.",
+    route: "/agent/cold-email-personalizer",
+    icon: "✉️",
+    fields: [
+      {
+        name: "name",
+        label: "Lead Name",
+        type: "text",
+        placeholder: "John Doe",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Lead Email Address",
+        type: "email",
+        placeholder: "john@example.com",
+        required: true,
+      },
+      {
+        name: "company",
+        label: "Company",
+        type: "text",
+        placeholder: "Acme Corp",
+        required: true,
+      },
+      {
+        name: "website",
+        label: "Website URL",
+        type: "url",
+        placeholder: "https://acme.com",
+        required: true,
+      },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI Cold Email Personalization Engine User Manual.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
