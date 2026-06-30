@@ -73,7 +73,7 @@ export default function MeetingNotesGeneratorUI({ agent }: MeetingNotesGenerator
               Generate Meeting Notes
             </h2>
             <p className="mt-2 text-muted">
-              Paste your transcript and we'll automatically summarize decisions and assign action items.
+              Paste your transcript and we&apos;ll automatically summarize decisions and assign action items.
             </p>
           </div>
 
