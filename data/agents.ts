@@ -205,6 +205,54 @@ export const agents: Agent[] = [
     outputKeys: ["priority", "reason"],
     docPath: "/docs/AI Order Priority & Notification System.pdf",
   },
+  {
+    id: "meeting-notes-generator",
+    name: "AI Meeting Notes → Action Items Generator",
+    description:
+      "Analyze meeting transcripts and automatically extract meeting summaries, key decisions, and action items, then email the results.",
+    route: "/agent/meeting-notes-generator",
+    icon: "📝",
+    fields: [
+      {
+        name: "meetingTitle",
+        label: "Meeting Title",
+        type: "text",
+        placeholder: "Weekly Sync",
+        required: true,
+      },
+      {
+        name: "meetingDate",
+        label: "Meeting Date",
+        type: "text",
+        placeholder: "June 25, 2026",
+        required: true,
+      },
+      {
+        name: "participants",
+        label: "Participants",
+        type: "text",
+        placeholder: "John, Jane, Doe",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Email Address",
+        type: "email",
+        placeholder: "jane@example.com",
+        required: true,
+      },
+      {
+        name: "transcript",
+        label: "Transcript",
+        type: "textarea",
+        placeholder: "Paste the full meeting transcript here...",
+        required: true,
+        rows: 6,
+      },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI Meeting Notes & Action Items Generator.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
