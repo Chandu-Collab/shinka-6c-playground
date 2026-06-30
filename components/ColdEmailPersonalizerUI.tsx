@@ -66,7 +66,7 @@ export default function ColdEmailPersonalizerUI({ agent }: ColdEmailPersonalizer
               Cold Email Personalizer
             </h2>
             <p className="mt-2 text-muted">
-              Enter the lead's details. Our AI will analyze their website and generate a hyper-personalized email.
+              Enter the lead&apos;s details. Our AI will analyze their website and generate a hyper-personalized email.
             </p>
           </div>
 
