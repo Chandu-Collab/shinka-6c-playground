@@ -9,8 +9,8 @@ const WEBHOOK_URLS: Record<string, string | undefined> = {
   "business-insights": process.env.N8N_INSIGHTS_WEBHOOK_URL,
   "instagram-dm-lead": process.env.N8N_INSTAGRAM_WEBHOOK_URL,
   "order-priority": process.env.N8N_ORDER_WEBHOOK_URL,
-  "meeting-notes-generator": process.env.N8N_MEETING_NOTES_WEBHOOK_URL || "https://scanning-overfeed-galley.ngrok-free.dev/webhook/meeting-notes-generator",
-  "cold-email-personalizer": process.env.N8N_COLD_EMAIL_WEBHOOK_URL || "https://scanning-overfeed-galley.ngrok-free.dev/webhook/cold-email-personalizer",
+  "meeting-notes-generator": process.env.N8N_MEETING_NOTES_WEBHOOK_URL,
+  "cold-email-personalizer": process.env.N8N_COLD_EMAIL_WEBHOOK_URL,
 };
 
 function getWebhookUrl(agentId: string): string {

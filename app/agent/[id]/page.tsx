@@ -8,6 +8,7 @@ import InstagramDMUI from "@/components/InstagramDMUI";
 import OrderPriorityUI from "@/components/OrderPriorityUI";
 import MeetingNotesGeneratorUI from "@/components/MeetingNotesGeneratorUI";
 import ColdEmailPersonalizerUI from "@/components/ColdEmailPersonalizerUI";
+import WebsiteChatbotUI from "@/components/WebsiteChatbotUI";
 import DocViewer from "@/components/DocViewer";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
@@ -79,6 +80,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <MeetingNotesGeneratorUI agent={agent} />
       ) : agent.id === "cold-email-personalizer" ? (
         <ColdEmailPersonalizerUI agent={agent} />
+      ) : agent.id === "website-chat" ? (
+        <WebsiteChatbotUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}
