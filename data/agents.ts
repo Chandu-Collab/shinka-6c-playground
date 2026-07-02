@@ -293,6 +293,17 @@ export const agents: Agent[] = [
     outputKeys: ["message"],
     docPath: "/docs/AI Cold Email Personalization Engine User Manual.pdf",
   },
+  {
+    id: "website-chat",
+    name: "AI Website Chatbot with Memory",
+    description:
+      "A conversational AI assistant that remembers your conversation history and provides accurate support.",
+    route: "/agent/website-chat",
+    icon: "💬",
+    fields: [],
+    outputKeys: [],
+    docPath: "/docs/AI_Website_Chatbot_with_Memory_Documentation.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {

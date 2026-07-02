@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ToastProvider } from "@/components/Toast";
 import ThemeToggle from "@/components/ThemeToggle";
+import GlobalAssistantWidget from "@/components/GlobalAssistantWidget";
 import Link from "next/link";
 import "./globals.css";
 
@@ -120,6 +121,7 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
+          <GlobalAssistantWidget />
         </ToastProvider>
       </body>
     </html>
