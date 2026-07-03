@@ -11,6 +11,7 @@ const WEBHOOK_URLS: Record<string, string | undefined> = {
   "order-priority": process.env.N8N_ORDER_WEBHOOK_URL,
   "meeting-notes-generator": process.env.N8N_MEETING_NOTES_WEBHOOK_URL,
   "cold-email-personalizer": process.env.N8N_COLD_EMAIL_WEBHOOK_URL,
+  "website-chat": process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL,
 };
 
 function getWebhookUrl(agentId: string): string {
@@ -83,6 +84,12 @@ function generateMockResponse(
   if (agentId === "cold-email-personalizer") {
     return {
       message: "The lead data is being analyzed. A personalized cold email is being generated and will be sent shortly.",
+    };
+  }
+
+  if (agentId === "website-chat") {
+    return {
+      output: "Hello! I am a simulated response since the webhook is not connected. How can I assist you further?",
     };
   }
 
