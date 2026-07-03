@@ -1,21 +1,20 @@
 import type { Agent } from "@/data/agents";
 import { getAgentById } from "@/data/agents";
 
-const WEBHOOK_URLS: Record<string, string | undefined> = {
-  "youtube-repurposer": process.env.N8N_YOUTUBE_WEBHOOK_URL,
-  "lead-auto-reply": process.env.N8N_LEAD_REPLY_WEBHOOK_URL,
-  "resume-job-matcher": process.env.N8N_JOB_MATCHER_WEBHOOK_URL,
-  "multilingual-support": process.env.N8N_SUPPORT_WEBHOOK_URL,
-  "business-insights": process.env.N8N_INSIGHTS_WEBHOOK_URL,
-  "instagram-dm-lead": process.env.N8N_INSTAGRAM_WEBHOOK_URL,
-  "order-priority": process.env.N8N_ORDER_WEBHOOK_URL,
-  "meeting-notes-generator": process.env.N8N_MEETING_NOTES_WEBHOOK_URL,
-  "cold-email-personalizer": process.env.N8N_COLD_EMAIL_WEBHOOK_URL,
-  "website-chat": process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL,
-};
-
 function getWebhookUrl(agentId: string): string {
-  return WEBHOOK_URLS[agentId] ?? "";
+  switch (agentId) {
+    case "youtube-repurposer": return process.env.N8N_YOUTUBE_WEBHOOK_URL ?? "";
+    case "lead-auto-reply": return process.env.N8N_LEAD_REPLY_WEBHOOK_URL ?? "";
+    case "resume-job-matcher": return process.env.N8N_JOB_MATCHER_WEBHOOK_URL ?? "";
+    case "multilingual-support": return process.env.N8N_SUPPORT_WEBHOOK_URL ?? "";
+    case "business-insights": return process.env.N8N_INSIGHTS_WEBHOOK_URL ?? "";
+    case "instagram-dm-lead": return process.env.N8N_INSTAGRAM_WEBHOOK_URL ?? "";
+    case "order-priority": return process.env.N8N_ORDER_WEBHOOK_URL ?? "";
+    case "meeting-notes-generator": return process.env.N8N_MEETING_NOTES_WEBHOOK_URL ?? "";
+    case "cold-email-personalizer": return process.env.N8N_COLD_EMAIL_WEBHOOK_URL ?? "";
+    case "website-chat": return process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL ?? "";
+    default: return "";
+  }
 }
 
 export interface WebhookResult {
@@ -112,7 +111,10 @@ export async function callWebhook(
   try {
     const response = await fetch(webhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "69420",
+      },
       body: JSON.stringify({
         agentId: agent.id,
         ...payload,
