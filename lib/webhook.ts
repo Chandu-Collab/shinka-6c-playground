@@ -12,7 +12,7 @@ function getWebhookUrl(agentId: string): string {
     case "order-priority": return process.env.N8N_ORDER_WEBHOOK_URL ?? "";
     case "meeting-notes-generator": return process.env.N8N_MEETING_NOTES_WEBHOOK_URL ?? "";
     case "cold-email-personalizer": return process.env.N8N_COLD_EMAIL_WEBHOOK_URL ?? "";
-    case "website-chat": return process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL ?? "";
+    case "website-chat": return process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL ?? process.env.N8N_WEBSITE_CHAT_WEBHOOK_URL ?? "";
     default: return "";
   }
 }
