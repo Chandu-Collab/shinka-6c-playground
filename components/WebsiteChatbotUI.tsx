@@ -4,6 +4,7 @@ import type { Agent } from "@/data/agents";
 import { useState, useEffect, useRef } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { useToast } from "@/components/Toast";
+import { callAgentApi } from "@/lib/api";
 
 interface WebsiteChatbotUIProps {
   agent: Agent;
@@ -66,41 +67,33 @@ export default function WebsiteChatbotUI({ agent }: WebsiteChatbotUIProps) {
     trackEvent({ event: "agent_submit", agentId: agent.id });
 
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL;
-      if (!webhookUrl) throw new Error("Webhook URL is not configured");
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          conversationId,
-          message: userMessage,
-        }),
+      const response = await callAgentApi(agent.id, {
+        conversationId,
+        message: userMessage,
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.success) {
+        throw new Error(response.error || "Failed to connect to chatbot server.");
       }
 
-      const data = await response.json();
+      const data = response.data;
       
       let botText = "Sorry, I couldn't understand that response.";
       
       // Try to parse n8n webhook response
       if (Array.isArray(data) && data.length > 0) {
-        if (data[0].output) botText = data[0].output;
-        else if (data[0].messages) botText = data[0].messages;
-        else if (data[0].message) botText = data[0].message;
-        else if (data[0].json && data[0].json.output) botText = data[0].json.output;
+        if (data[0].output) botText = String(data[0].output);
+        else if (data[0].messages) botText = String(data[0].messages);
+        else if (data[0].message) botText = String(data[0].message);
+        else if (data[0].json && data[0].json.output) botText = String(data[0].json.output);
         else botText = JSON.stringify(data);
       } else if (data && typeof data === 'object') {
          if (data.output) {
-            botText = data.output;
+            botText = String(data.output);
          } else if (data.messages) {
-            botText = data.messages;
+            botText = String(data.messages);
          } else if (data.message) {
-            botText = data.message;
+            botText = String(data.message);
          } else {
             botText = JSON.stringify(data);
          }
