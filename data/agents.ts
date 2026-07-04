@@ -304,6 +304,16 @@ export const agents: Agent[] = [
     outputKeys: [],
     docPath: "/docs/AI_Website_Chatbot_with_Memory_Documentation.pdf",
   },
+  {
+    id: "freelancer-invoice",
+    name: "Freelancer Invoice & Billing Automation",
+    description:
+      "Automatically generate professional invoices, track them in Google Sheets, save PDFs to Drive, and email them to clients.",
+    route: "/agent/freelancer-invoice",
+    icon: "🧾",
+    fields: [],
+    outputKeys: ["message"],
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
