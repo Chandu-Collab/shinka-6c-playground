@@ -9,6 +9,7 @@ import OrderPriorityUI from "@/components/OrderPriorityUI";
 import MeetingNotesGeneratorUI from "@/components/MeetingNotesGeneratorUI";
 import ColdEmailPersonalizerUI from "@/components/ColdEmailPersonalizerUI";
 import WebsiteChatbotUI from "@/components/WebsiteChatbotUI";
+import FreelancerInvoiceAutomationUI from "@/components/FreelancerInvoiceAutomationUI";
 import DocViewer from "@/components/DocViewer";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
@@ -82,6 +83,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <ColdEmailPersonalizerUI agent={agent} />
       ) : agent.id === "website-chat" ? (
         <WebsiteChatbotUI agent={agent} />
+      ) : agent.id === "freelancer-invoice" ? (
+        <FreelancerInvoiceAutomationUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}
