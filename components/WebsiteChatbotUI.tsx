@@ -68,7 +68,7 @@ export default function WebsiteChatbotUI({ agent }: WebsiteChatbotUIProps) {
 
     try {
       // Use the production URL provided by the user directly to bypass Next.js API timeouts
-      const webhookUrl = process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL || "";
+      const webhookUrl = "https://scanning-overfeed-galley.ngrok-free.dev/webhook/website-chat";
       
       const response = await fetch(webhookUrl, {
         method: "POST",
