@@ -67,16 +67,25 @@ export default function WebsiteChatbotUI({ agent }: WebsiteChatbotUIProps) {
     trackEvent({ event: "agent_submit", agentId: agent.id });
 
     try {
-      const response = await callAgentApi(agent.id, {
-        conversationId,
-        message: userMessage,
+      // Use the production URL provided by the user directly to bypass Next.js API timeouts
+      const webhookUrl = process.env.NEXT_PUBLIC_WEBSITE_CHAT_WEBHOOK_URL || "";
+      
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          conversationId,
+          message: userMessage,
+        }),
       });
 
-      if (!response.success) {
-        throw new Error(response.error || "Failed to connect to chatbot server.");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = response.data;
+      const data = await response.json();
       
       let botText = "Sorry, I couldn't understand that response.";
       
