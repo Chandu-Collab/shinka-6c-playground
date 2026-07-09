@@ -56,7 +56,7 @@ export default function GlobalAssistantWidget() {
 
     try {
       // Use the production URL provided by the user
-      const webhookUrl = process.env.NEXT_PUBLIC_SHINKA_ASSISTANT_WEBHOOK_URL || "";
+      const webhookUrl = "https://scanning-overfeed-galley.ngrok-free.dev/webhook/shinka-6c%20assistant";
       
       const response = await fetch(webhookUrl, {
         method: "POST",
