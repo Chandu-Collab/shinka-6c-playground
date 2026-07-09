@@ -14,6 +14,7 @@ function getWebhookUrl(agentId: string): string {
     case "cold-email-personalizer": return process.env.N8N_COLD_EMAIL_WEBHOOK_URL ?? "";
     case "website-chat": return process.env.N8N_WEBSITE_CHAT_WEBHOOK_URL ?? "";
     case "freelancer-invoice": return process.env.N8N_FREELANCE_INVOICE_WEBHOOK_URL ?? "";
+    case "ai-bug-reporter": return process.env.N8N_BUG_REPORTER_WEBHOOK_URL ?? "";
     default: return "";
   }
 }
@@ -96,6 +97,12 @@ function generateMockResponse(
   if (agentId === "freelancer-invoice") {
     return {
       message: "The invoice is being generated, saved to Google Drive, tracked in Sheets, and emailed to your client.",
+    };
+  }
+
+  if (agentId === "ai-bug-reporter") {
+    return {
+      message: "Bug report submitted successfully! Our AI is analyzing it now.",
     };
   }
 

@@ -313,6 +313,32 @@ export const agents: Agent[] = [
     icon: "🧾",
     fields: [],
     outputKeys: ["message"],
+    docPath: "/docs/Freelancer_Invoice_Billing_Automation_Documentation (2).pdf",
+  },
+  {
+    id: "ai-bug-reporter",
+    name: "AI Bug Report Auto Ticket System",
+    description:
+      "Analyze bug reports and automatically generate structured engineering tickets with AI-driven severity, category, and root cause analysis.",
+    route: "/agent/ai-bug-reporter",
+    icon: "🐛",
+    fields: [
+      { name: "reporter_name", label: "Your Name", type: "text", placeholder: "John Doe", required: true },
+      { name: "reporter_email", label: "Your Email", type: "email", placeholder: "john@example.com", required: true },
+      { name: "application", label: "Application", type: "text", placeholder: "e.g. User Dashboard", required: true },
+      { name: "environment", label: "Environment", type: "text", placeholder: "e.g. Production, Staging", required: true },
+      { name: "browser", label: "Browser", type: "text", placeholder: "e.g. Chrome 114", required: true },
+      { name: "device", label: "Device", type: "text", placeholder: "e.g. MacBook Pro", required: true },
+      { name: "page_url", label: "Page URL", type: "url", placeholder: "https://example.com/page", required: true },
+      { name: "bug_title", label: "Bug Title", type: "text", placeholder: "Brief summary of the issue", required: true },
+      { name: "bug_description", label: "Bug Description", type: "textarea", placeholder: "Detailed description of what went wrong...", required: true, rows: 4 },
+      { name: "steps_to_reproduce", label: "Steps to Reproduce", type: "textarea", placeholder: "1. Go to...\n2. Click on...", required: true, rows: 4 },
+      { name: "expected_result", label: "Expected Result", type: "textarea", placeholder: "What should have happened?", required: true, rows: 3 },
+      { name: "actual_result", label: "Actual Result", type: "textarea", placeholder: "What actually happened?", required: true, rows: 3 },
+      { name: "attachment", label: "Attachment (Base64)", type: "text", placeholder: "Base64 encoded string or URL", required: false }
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI_Bug_Report_Auto_Ticket_System_Documentation_v1.0.pdf",
   },
 ];
 
