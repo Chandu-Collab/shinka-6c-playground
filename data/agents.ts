@@ -23,6 +23,32 @@ export interface Agent {
 
 export const agents: Agent[] = [
   {
+    id: "ai-research-agent",
+    name: "AI Research & Insights Agent",
+    description:
+      "Generate comprehensive, factual, and unbiased research reports on any topic and receive them via email.",
+    route: "/agent/ai-research-agent",
+    icon: "🔍",
+    fields: [
+      {
+        name: "topic",
+        label: "Research Topic",
+        type: "text",
+        placeholder: "e.g., The Future of Quantum Computing",
+        required: true,
+      },
+      {
+        name: "email",
+        label: "Email Address",
+        type: "email",
+        placeholder: "your@email.com",
+        required: true,
+      },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI Research Insights Agent.pdf",
+  },
+  {
     id: "youtube-repurposer",
     name: "YouTube Repurposer",
     description:

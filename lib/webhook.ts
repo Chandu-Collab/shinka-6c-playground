@@ -3,6 +3,7 @@ import { getAgentById } from "@/data/agents";
 
 function getWebhookUrl(agentId: string): string {
   switch (agentId) {
+    case "ai-research-agent": return process.env.N8N_AI_RESEARCH_WEBHOOK_URL ?? "";
     case "youtube-repurposer": return process.env.N8N_YOUTUBE_WEBHOOK_URL ?? "";
     case "lead-auto-reply": return process.env.N8N_LEAD_REPLY_WEBHOOK_URL ?? "";
     case "resume-job-matcher": return process.env.N8N_JOB_MATCHER_WEBHOOK_URL ?? "";
@@ -29,6 +30,12 @@ function generateMockResponse(
   agentId: string,
   payload: Record<string, unknown>
 ): Record<string, unknown> {
+  if (agentId === "ai-research-agent") {
+    return {
+      message: "Research has started! Your comprehensive report will be generated and emailed to you shortly. (Mock response)",
+    };
+  }
+
   if (agentId === "youtube-repurposer") {
     return {
       message: "Your content is being generated and will be sent to your email shortly. (Mock response)",
