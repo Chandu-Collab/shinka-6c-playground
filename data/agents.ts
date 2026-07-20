@@ -375,7 +375,7 @@ export const agents: Agent[] = [
     icon: "🕵️",
     fields: [],
     outputKeys: ["message"],
-    docPath: "/docs/AI_Competitor_Intelligence_Monitor.pdf",
+    docPath: "/docs/AI_Competitor_Intelligence_Agent_Blueprint.pdf",
   },
 ];
 
