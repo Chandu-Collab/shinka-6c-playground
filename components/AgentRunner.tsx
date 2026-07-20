@@ -51,38 +51,7 @@ export default function AgentRunner({ agent }: AgentRunnerProps) {
       }
     }
 
-    let result;
-    
-    // Bypass Next.js API for ai-research-agent to avoid timeouts in production
-    if (agent.id === "ai-research-agent") {
-      try {
-        const webhookUrl = "https://scanning-overfeed-galley.ngrok-free.dev/webhook/ai-research-agent";
-        const response = await fetch(webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-          },
-          body: JSON.stringify({
-            agentId: agent.id,
-            ...payload,
-          }),
-        });
-
-        if (!response.ok) {
-          result = { success: false, error: `Webhook returned ${response.status}` };
-        } else {
-          result = { 
-            success: true, 
-            data: { message: "Research has started! Your comprehensive report will be generated and emailed to you shortly." } 
-          };
-        }
-      } catch (error: any) {
-        result = { success: false, error: error.message || "Failed to reach webhook" };
-      }
-    } else {
-      result = await callAgentApi(agent.id, payload);
-    }
+    const result = await callAgentApi(agent.id, payload);
 
     if (!result.success) {
       setError(result.error ?? "Request failed");

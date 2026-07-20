@@ -366,6 +366,17 @@ export const agents: Agent[] = [
     outputKeys: ["message"],
     docPath: "/docs/AI_Bug_Report_Auto_Ticket_System_Documentation_v1.0.pdf",
   },
+  {
+    id: "competitor-intelligence-monitor",
+    name: "AI Competitor Intelligence Monitor",
+    description:
+      "Automated competitor monitoring. Scrapes competitor websites, detects changes in products/pricing, and alerts you via email.",
+    route: "/agent/competitor-intelligence-monitor",
+    icon: "🕵️",
+    fields: [],
+    outputKeys: ["message"],
+    docPath: "/docs/AI_Competitor_Intelligence_Monitor.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
