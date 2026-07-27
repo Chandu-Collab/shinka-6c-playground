@@ -3,7 +3,7 @@ import { getAgentById } from "@/data/agents";
 
 function getWebhookUrl(agentId: string): string {
   switch (agentId) {
-    case "ai-research-agent": return process.env.N8N_AI_RESEARCH_WEBHOOK_URL ?? "";
+    case "ai-research-agent": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/ai-research-agent";
     case "youtube-repurposer": return process.env.N8N_YOUTUBE_WEBHOOK_URL ?? "";
     case "lead-auto-reply": return process.env.N8N_LEAD_REPLY_WEBHOOK_URL ?? "";
     case "resume-job-matcher": return process.env.N8N_JOB_MATCHER_WEBHOOK_URL ?? "";
@@ -16,7 +16,7 @@ function getWebhookUrl(agentId: string): string {
     case "website-chat": return process.env.N8N_WEBSITE_CHAT_WEBHOOK_URL ?? "";
     case "freelancer-invoice": return process.env.N8N_FREELANCE_INVOICE_WEBHOOK_URL ?? "";
     case "ai-bug-reporter": return process.env.N8N_BUG_REPORTER_WEBHOOK_URL ?? "";
-    case "ai-receptionist": return process.env.N8N_RECEPTIONIST_WEBHOOK_URL ?? "";
+    case "ai-receptionist": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/ai-receptionist";
     default: return "";
   }
 }
