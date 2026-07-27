@@ -377,6 +377,26 @@ export const agents: Agent[] = [
     outputKeys: ["message"],
     docPath: "/docs/AI_Competitor_Intelligence_Agent_Blueprint.pdf",
   },
+  {
+    id: "ai-receptionist",
+    name: "AI Receptionist Automation Series",
+    description:
+      "A professional AI Receptionist that handles FAQs, lead qualification, and appointment booking.",
+    route: "/agent/ai-receptionist",
+    icon: "🛎️",
+    fields: [
+      { name: "sessionId", label: "Session ID", type: "text", placeholder: "sess_12345 (Optional)", required: false },
+      { name: "message", label: "Message", type: "textarea", placeholder: "I'd like to book a haircut for tomorrow.", required: true, rows: 4 },
+      { name: "customer_name", label: "Customer Name", type: "text", placeholder: "John Doe", required: false },
+      { name: "customer_email", label: "Customer Email", type: "email", placeholder: "john@example.com", required: false },
+      { name: "customer_phone", label: "Customer Phone", type: "text", placeholder: "+1234567890", required: false },
+      { name: "service", label: "Service", type: "text", placeholder: "Haircut", required: false },
+      { name: "appointment_date", label: "Appointment Date", type: "text", placeholder: "2026-07-28", required: false },
+      { name: "appointment_time", label: "Appointment Time", type: "text", placeholder: "14:00", required: false },
+    ],
+    outputKeys: ["intent", "reply", "requires_human", "missingFields"],
+    docPath: "/docs/AI_Receptionist_Blueprint.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
