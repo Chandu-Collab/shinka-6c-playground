@@ -15,7 +15,8 @@ function getWebhookUrl(agentId: string): string {
     case "cold-email-personalizer": return process.env.N8N_COLD_EMAIL_WEBHOOK_URL ?? "";
     case "website-chat": return process.env.N8N_WEBSITE_CHAT_WEBHOOK_URL ?? "";
     case "freelancer-invoice": return process.env.N8N_FREELANCE_INVOICE_WEBHOOK_URL ?? "";
-    case "ai-bug-reporter": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/AI%20Bug%20Reporter";
+    case "ai-bug-reporter": return process.env.N8N_BUG_REPORTER_WEBHOOK_URL ?? "";
+    case "ai-receptionist": return process.env.N8N_RECEPTIONIST_WEBHOOK_URL ?? "";
     default: return "";
   }
 }
@@ -113,6 +114,14 @@ function generateMockResponse(
     };
   }
 
+  if (agentId === "ai-receptionist") {
+    return {
+      intent: "faq",
+      reply: "Hi there! I am a simulated receptionist. How can I help you today?",
+      requires_human: false
+    };
+  }
+
   return { result: "Mock response generated successfully." };
 }
 
@@ -130,16 +139,36 @@ export async function callWebhook(
   }
 
   try {
+    let finalPayload: Record<string, unknown> = {
+      agentId: agent.id,
+      ...payload,
+    };
+
+    if (agent.id === "ai-receptionist") {
+      finalPayload = {
+        agentId: agent.id,
+        sessionId: payload.sessionId || `sess_${Date.now()}`,
+        message: payload.message,
+        customer: {
+          name: payload.customer_name,
+          email: payload.customer_email,
+          phone: payload.customer_phone,
+        },
+        appointment: {
+          service: payload.service,
+          date: payload.appointment_date,
+          time: payload.appointment_time,
+        }
+      } as Record<string, unknown>;
+    }
+
     const response = await fetch(webhookUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "ngrok-skip-browser-warning": "69420",
       },
-      body: JSON.stringify({
-        agentId: agent.id,
-        ...payload,
-      }),
+      body: JSON.stringify(finalPayload),
       signal: AbortSignal.timeout(30000),
     });
 
@@ -153,14 +182,19 @@ export async function callWebhook(
     const contentType = response.headers.get("content-type");
     let data: Record<string, unknown>;
 
-    if (contentType?.includes("application/json")) {
-      const json = await response.json();
-      data =
-        typeof json === "object" && json !== null && "data" in json
-          ? (json.data as Record<string, unknown>)
-          : (json as Record<string, unknown>);
+    const text = await response.text();
+
+    if (contentType?.includes("application/json") && text.trim() !== "") {
+      try {
+        const json = JSON.parse(text);
+        data =
+          typeof json === "object" && json !== null && "data" in json
+            ? (json.data as Record<string, unknown>)
+            : (json as Record<string, unknown>);
+      } catch (e) {
+        data = { result: text };
+      }
     } else {
-      const text = await response.text();
       data = { result: text };
     }
 
