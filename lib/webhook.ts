@@ -15,7 +15,7 @@ function getWebhookUrl(agentId: string): string {
     case "cold-email-personalizer": return process.env.N8N_COLD_EMAIL_WEBHOOK_URL ?? "";
     case "website-chat": return process.env.N8N_WEBSITE_CHAT_WEBHOOK_URL ?? "";
     case "freelancer-invoice": return process.env.N8N_FREELANCE_INVOICE_WEBHOOK_URL ?? "";
-    case "ai-bug-reporter": return process.env.N8N_BUG_REPORTER_WEBHOOK_URL ?? "";
+    case "ai-bug-reporter": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/AI%20Bug%20Reporter";
     case "ai-receptionist": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/ai-receptionist";
     default: return "";
   }
