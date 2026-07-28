@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Shinka-6c Playground",
   description: "AI Agents Hub — run powerful agents with one click",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
