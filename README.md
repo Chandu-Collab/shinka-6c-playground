@@ -76,3 +76,21 @@ Push to GitHub and import in Vercel. Add env vars in the Vercel dashboard.
   api.ts                # Client API helper
   webhook.ts            # Server webhook + mock logic
 ```
+
+## License
+
+This project is licensed under the MIT License.
+
+See the LICENSE file for the complete license text.
+
+## Shinka Philosophy
+
+Built to learn. Built to inspire. Built to create.
+
+Shinka automation workflows are shared with the community to encourage learning, experimentation, and the creation of new ideas.
+
+You are welcome to study the workflows, experiment with them, modify them, and use them as inspiration for your own projects.
+
+If you build something new from these workflows, we'd love to see what you create. 🚀
+
+Please respect the original work and retain the Shinka copyright and license notices where required by the MIT License.
