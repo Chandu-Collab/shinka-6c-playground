@@ -397,6 +397,21 @@ export const agents: Agent[] = [
     outputKeys: ["intent", "reply", "requires_human", "missingFields"],
     docPath: "/docs/AI_Receptionist_Blueprint.pdf",
   },
+  {
+    id: "ai-lead-management-automation",
+    name: "AI Lead Management Automation",
+    description:
+      "Automate lead capture, qualify prospects, score opportunities, and auto-reply with personalized messages seamlessly.",
+    route: "/agent/ai-lead-management-automation",
+    icon: "📈",
+    fields: [
+      { name: "name", label: "Full Name", type: "text", placeholder: "John Doe", required: true },
+      { name: "email", label: "Email Address", type: "email", placeholder: "john@example.com", required: true },
+      { name: "message", label: "Message/Inquiry", type: "textarea", placeholder: "Tell us about your project...", required: true, rows: 4 },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI_Lead_Management_Sales_Automation_Blueprint.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
