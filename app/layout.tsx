@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ToastProvider } from "@/components/Toast";
 import ThemeToggle from "@/components/ThemeToggle";
 import GlobalAssistantWidget from "@/components/GlobalAssistantWidget";
+import ContentProtector from "@/components/security/ContentProtector";
 import Link from "next/link";
 import "./globals.css";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans`}
       >
+        <ContentProtector />
         <ToastProvider>
           <header className="sticky top-0 z-50 border-b border-white/5 bg-surface/60 backdrop-blur-xl supports-[backdrop-filter]:bg-surface/60">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
