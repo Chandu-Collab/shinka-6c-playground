@@ -15,8 +15,9 @@ function getWebhookUrl(agentId: string): string {
     case "cold-email-personalizer": return process.env.N8N_COLD_EMAIL_WEBHOOK_URL ?? "";
     case "website-chat": return process.env.N8N_WEBSITE_CHAT_WEBHOOK_URL ?? "";
     case "freelancer-invoice": return process.env.N8N_FREELANCE_INVOICE_WEBHOOK_URL ?? "";
-    case "ai-bug-reporter": return process.env.N8N_BUG_REPORTER_WEBHOOK_URL ?? "";
+    case "ai-bug-reporter": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/AI%20Bug%20Reporter";
     case "ai-receptionist": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/ai-receptionist";
+    case "ai-lead-management-automation": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/lead-capture";
     default: return "";
   }
 }
@@ -119,6 +120,12 @@ function generateMockResponse(
       intent: "faq",
       reply: "Hi there! I am a simulated receptionist. How can I help you today?",
       requires_human: false
+    };
+  }
+
+  if (agentId === "ai-lead-management-automation") {
+    return {
+      message: "Lead processed successfully! The AI has qualified the prospect, updated the CRM, and sent a personalized auto-response.",
     };
   }
 

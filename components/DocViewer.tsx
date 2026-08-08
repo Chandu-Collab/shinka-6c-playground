@@ -31,12 +31,14 @@ export default function DocViewer({ docPath }: { docPath: string }) {
                 </svg>
               </button>
             </div>
-            <div className="flex-1 overflow-hidden bg-zinc-900">
-              <iframe
-                src={`${docPath}#view=FitH`}
-                className="h-full w-full border-0"
-                title="Documentation PDF"
-              />
+            <div className="flex-1 overflow-hidden bg-zinc-900 relative">
+              <div className="absolute top-0 bottom-0 left-0 w-[calc(100%+20px)]">
+                <iframe
+                  src={`${docPath}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+                  className="h-full w-full border-0"
+                  title="Documentation PDF"
+                />
+              </div>
             </div>
           </div>
         </div>

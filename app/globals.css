@@ -32,6 +32,16 @@
   body {
     @apply bg-[var(--background)] text-[var(--foreground)] antialiased;
   }
+
+  /* Hide scrollbars globally but allow scrolling */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer utilities {
