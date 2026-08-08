@@ -3,7 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ToastProvider } from "@/components/Toast";
 import ThemeToggle from "@/components/ThemeToggle";
 import GlobalAssistantWidget from "@/components/GlobalAssistantWidget";
+import ContentProtector from "@/components/security/ContentProtector";
 import Link from "next/link";
+import Image from "next/image";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,8 +19,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shinka-6c Playground",
-  description: "AI Agents Hub — run powerful agents with one click",
+  metadataBase: new URL("https://shinka-ai-playground.netlify.app"),
+  title: "Shinka-6c Playground | AI Agents Hub",
+  description: "Deploy hyper-intelligent agents to automate your sales, repurpose content, and monitor revenue in real-time.",
+  openGraph: {
+    title: "Shinka-6c Playground | AI Agents Hub",
+    description: "Deploy hyper-intelligent agents to automate your sales, repurpose content, and monitor revenue in real-time.",
+    url: "https://shinka-ai-playground.netlify.app",
+    siteName: "Shinka-6c",
+    images: [
+      {
+        url: "/banner.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
   icons: {
     icon: "/logo.png",
   },
@@ -34,6 +52,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans`}
       >
+        <ContentProtector />
         <ToastProvider>
           <header className="sticky top-0 z-50 border-b border-white/5 bg-surface/60 backdrop-blur-xl supports-[backdrop-filter]:bg-surface/60">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -41,8 +60,8 @@ export default function RootLayout({
                 href="/"
                 className="flex items-center gap-2 text-xl font-bold tracking-tight transition-opacity hover:opacity-80"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg shadow-[0_0_15px_rgba(99,102,241,0.5)] overflow-hidden">
-                  <img src="/logo.png" alt="Shinka-6c Logo" className="h-full w-full object-cover" />
+                <div className="relative flex h-8 w-8 items-center justify-center rounded-lg shadow-[0_0_15px_rgba(99,102,241,0.5)] overflow-hidden">
+                  <Image src="/logo.png" alt="Shinka-6c Logo" fill className="object-cover" />
                 </div>
                 Shinka<span className="text-accent">-6c</span>
               </Link>
@@ -64,43 +83,47 @@ export default function RootLayout({
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
                 <div>
-                  <h4 className="font-semibold text-foreground mb-4">Product</h4>
+                  <h4 className="font-semibold text-foreground mb-1">Standalone Agents</h4>
+                  <p className="text-xs text-muted mb-4">Quick Setup (Week-1 Value)</p>
                   <ul className="space-y-2 text-sm text-muted">
-                    <li><Link href="/features" className="hover:text-accent transition-colors">Features</Link></li>
-                    <li><Link href="/" className="hover:text-accent transition-colors">Agents</Link></li>
-                    <li><Link href="/pricing" className="hover:text-accent transition-colors">Pricing</Link></li>
+                    <li><Link href="/agent/youtube-repurposer" className="hover:text-accent transition-colors">YouTube Repurposer</Link></li>
+                    <li><Link href="/agent/resume-job-matcher" className="hover:text-accent transition-colors">Resume Job Matcher</Link></li>
+                    <li><Link href="/agent/lead-auto-reply" className="hover:text-accent transition-colors">Lead Auto Reply</Link></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-1 flex items-center">
+                    Series Agents <span className="text-[10px] bg-accent/20 text-accent px-1.5 py-0.5 rounded-full ml-2">New</span>
+                  </h4>
+                  <p className="text-xs text-muted mb-4">Multi-step (Long Run Value)</p>
+                  <ul className="space-y-2 text-sm text-muted">
+                    <li><Link href="/agent/ai-receptionist" className="hover:text-accent transition-colors">AI Receptionist Series</Link></li>
+                    <li><Link href="/agent/ai-lead-management-automation" className="hover:text-accent transition-colors">Lead Management Pipeline</Link></li>
+                    <li><Link href="/agent/business-insights" className="hover:text-accent transition-colors">Business Insights Engine</Link></li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground mb-4">Resources</h4>
                   <ul className="space-y-2 text-sm text-muted">
                     <li><Link href="/documentation" className="hover:text-accent transition-colors">Documentation</Link></li>
-                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">GitHub</a></li>
+                    <li><Link href="/features" className="hover:text-accent transition-colors">Features</Link></li>
+                    <li><a href="https://github.com/Chandu-Collab/ai-automation-workflows" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">GitHub Repository</a></li>
                     <li><Link href="/tutorials" className="hover:text-accent transition-colors">Tutorials <span className="opacity-50 text-xs">(soon)</span></Link></li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                    Try Now <span className="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded-full">🔥</span>
-                  </h4>
-                  <ul className="space-y-2 text-sm text-muted">
-                    <li><Link href="/agent/youtube-repurposer" className="hover:text-accent transition-colors">YouTube Agent</Link></li>
-                    <li><Link href="/agent/resume-job-matcher" className="hover:text-accent transition-colors">Resume Agent</Link></li>
-                    <li><Link href="/agent/lead-auto-reply" className="hover:text-accent transition-colors">Lead Agent</Link></li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground mb-4">Company</h4>
                   <ul className="space-y-2 text-sm text-muted">
-                    <li><Link href="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
-                    <li><Link href="/about" className="hover:text-accent transition-colors">About</Link></li>
+                    <li><Link href="/about" className="hover:text-accent transition-colors">About Us</Link></li>
+                    <li><Link href="/contact" className="hover:text-accent transition-colors">Contact Sales</Link></li>
+                    <li><Link href="/pricing" className="hover:text-accent transition-colors">Pricing</Link></li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground mb-4">Legal</h4>
                   <ul className="space-y-2 text-sm text-muted">
                     <li><Link href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link></li>
-                    <li><Link href="/terms" className="hover:text-accent transition-colors">Terms</Link></li>
+                    <li><Link href="/terms" className="hover:text-accent transition-colors">Terms of Service</Link></li>
                   </ul>
                 </div>
               </div>

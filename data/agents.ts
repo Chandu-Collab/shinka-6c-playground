@@ -28,7 +28,7 @@ export const agents: Agent[] = [
     description:
       "Generate comprehensive, factual, and unbiased research reports on any topic and receive them via email.",
     route: "/agent/ai-research-agent",
-    icon: "🔍",
+    icon: "Search",
     fields: [
       {
         name: "topic",
@@ -54,7 +54,7 @@ export const agents: Agent[] = [
     description:
       "Turn any YouTube video into LinkedIn posts, Twitter threads, and blog drafts in seconds.",
     route: "/agent/youtube-repurposer",
-    icon: "▶",
+    icon: "Youtube",
     fields: [
       {
         name: "email",
@@ -80,7 +80,7 @@ export const agents: Agent[] = [
     description:
       "Generate personalized, professional replies to inbound leads instantly.",
     route: "/agent/lead-auto-reply",
-    icon: "✉",
+    icon: "Mail",
     fields: [
       {
         name: "name",
@@ -114,7 +114,7 @@ export const agents: Agent[] = [
     description:
       "Paste your resume and let our AI analyze your skills to find the perfect remote jobs for you.",
     route: "/agent/resume-job-matcher",
-    icon: "🚀",
+    icon: "Rocket",
     fields: [
       {
         name: "email",
@@ -141,7 +141,7 @@ export const agents: Agent[] = [
     description:
       "Send queries in any language. Our AI detects, translates, classifies urgency, and auto-replies or escalates.",
     route: "/agent/multilingual-support",
-    icon: "🌍",
+    icon: "Globe",
     fields: [
       {
         name: "email",
@@ -175,7 +175,7 @@ export const agents: Agent[] = [
     description:
       "Automated growth analyst. Generates daily reports, detects revenue drops, and alerts you to pipeline issues.",
     route: "/agent/business-insights",
-    icon: "📊",
+    icon: "BarChart",
     fields: [],
     outputKeys: [],
     docPath: "/docs/AI Business Insights & Alert Agent.pdf",
@@ -186,7 +186,7 @@ export const agents: Agent[] = [
     description:
       "Automated lead qualification from Instagram DMs. Analyzes intent, scores leads (Hot/Warm/Cold), and syncs to Google Sheets.",
     route: "/agent/instagram-dm-lead",
-    icon: "📸",
+    icon: "Instagram",
     fields: [
       {
         name: "username",
@@ -220,7 +220,7 @@ export const agents: Agent[] = [
     description:
       "Automated order prioritization engine. Classifies incoming orders as High, Medium, or Low priority based on value and delivery type.",
     route: "/agent/order-priority",
-    icon: "📦",
+    icon: "Package",
     fields: [
       { name: "order_id", label: "Order ID", type: "text", placeholder: "ORD-12345", required: true },
       { name: "customer_name", label: "Customer Name", type: "text", placeholder: "Alice Smith", required: true },
@@ -237,7 +237,7 @@ export const agents: Agent[] = [
     description:
       "Analyze meeting transcripts and automatically extract meeting summaries, key decisions, and action items, then email the results.",
     route: "/agent/meeting-notes-generator",
-    icon: "📝",
+    icon: "FileText",
     fields: [
       {
         name: "meetingTitle",
@@ -285,7 +285,7 @@ export const agents: Agent[] = [
     description:
       "Automated research and personalization engine. Analyzes a lead's website and generates a highly personalized, human-sounding cold email.",
     route: "/agent/cold-email-personalizer",
-    icon: "✉️",
+    icon: "Mail",
     fields: [
       {
         name: "name",
@@ -325,7 +325,7 @@ export const agents: Agent[] = [
     description:
       "A conversational AI assistant that remembers your conversation history and provides accurate support.",
     route: "/agent/website-chat",
-    icon: "💬",
+    icon: "MessageSquare",
     fields: [],
     outputKeys: [],
     docPath: "/docs/AI_Website_Chatbot_with_Memory_Documentation.pdf",
@@ -336,7 +336,7 @@ export const agents: Agent[] = [
     description:
       "Automatically generate professional invoices, track them in Google Sheets, save PDFs to Drive, and email them to clients.",
     route: "/agent/freelancer-invoice",
-    icon: "🧾",
+    icon: "Receipt",
     fields: [],
     outputKeys: ["message"],
     docPath: "/docs/Freelancer_Invoice_Billing_Automation_Documentation (2).pdf",
@@ -347,7 +347,7 @@ export const agents: Agent[] = [
     description:
       "Analyze bug reports and automatically generate structured engineering tickets with AI-driven severity, category, and root cause analysis.",
     route: "/agent/ai-bug-reporter",
-    icon: "🐛",
+    icon: "Bug",
     fields: [
       { name: "reporter_name", label: "Your Name", type: "text", placeholder: "John Doe", required: true },
       { name: "reporter_email", label: "Your Email", type: "email", placeholder: "john@example.com", required: true },
@@ -372,7 +372,7 @@ export const agents: Agent[] = [
     description:
       "Automated competitor monitoring. Scrapes competitor websites, detects changes in products/pricing, and alerts you via email.",
     route: "/agent/competitor-intelligence-monitor",
-    icon: "🕵️",
+    icon: "Eye",
     fields: [],
     outputKeys: ["message"],
     docPath: "/docs/AI_Competitor_Intelligence_Agent_Blueprint.pdf",
@@ -383,7 +383,7 @@ export const agents: Agent[] = [
     description:
       "A professional AI Receptionist that handles FAQs, lead qualification, and appointment booking.",
     route: "/agent/ai-receptionist",
-    icon: "🛎️",
+    icon: "Bell",
     fields: [
       { name: "sessionId", label: "Session ID", type: "text", placeholder: "sess_12345 (Optional)", required: false },
       { name: "message", label: "Message", type: "textarea", placeholder: "I'd like to book a haircut for tomorrow.", required: true, rows: 4 },
@@ -396,6 +396,21 @@ export const agents: Agent[] = [
     ],
     outputKeys: ["intent", "reply", "requires_human", "missingFields"],
     docPath: "/docs/AI_Receptionist_Blueprint.pdf",
+  },
+  {
+    id: "ai-lead-management-automation",
+    name: "AI Lead Management Automation",
+    description:
+      "Automate lead capture, qualify prospects, score opportunities, and auto-reply with personalized messages seamlessly.",
+    route: "/agent/ai-lead-management-automation",
+    icon: "LineChart",
+    fields: [
+      { name: "name", label: "Full Name", type: "text", placeholder: "John Doe", required: true },
+      { name: "email", label: "Email Address", type: "email", placeholder: "john@example.com", required: true },
+      { name: "message", label: "Message/Inquiry", type: "textarea", placeholder: "Tell us about your project...", required: true, rows: 4 },
+    ],
+    outputKeys: ["message"],
+    docPath: "/docs/AI_Lead_Management_Sales_Automation_Blueprint.pdf",
   },
 ];
 

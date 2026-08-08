@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 interface Message {
   id: string;
@@ -122,7 +123,7 @@ export default function GlobalAssistantWidget() {
           <div className="flex items-center justify-between border-b border-border bg-background/80 px-5 py-4">
             <div className="flex items-center gap-3">
               <div className="relative flex h-9 w-9 items-center justify-center rounded-full shadow-[0_0_15px_rgba(var(--accent),0.5)] overflow-hidden bg-white/5">
-                <img src="/logo.png" alt="Shinka-6c Logo" className="relative z-10 h-full w-full object-cover" />
+                <Image src="/logo.png" alt="Shinka-6c Logo" fill className="relative z-10 object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent to-accent-hover opacity-20"></div>
               </div>
               <div>
@@ -221,7 +222,7 @@ export default function GlobalAssistantWidget() {
           {isOpen ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative z-10"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           ) : (
-            <img src="/logo.png" alt="Chat" className="relative z-10 h-9 w-9 object-cover rounded-full" />
+            <Image src="/logo.png" alt="Chat" width={36} height={36} className="relative z-10 object-cover rounded-full" />
           )}
         </button>
         

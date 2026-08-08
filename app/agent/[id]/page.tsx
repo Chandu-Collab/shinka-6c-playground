@@ -11,6 +11,7 @@ import ColdEmailPersonalizerUI from "@/components/ColdEmailPersonalizerUI";
 import WebsiteChatbotUI from "@/components/WebsiteChatbotUI";
 import FreelancerInvoiceAutomationUI from "@/components/FreelancerInvoiceAutomationUI";
 import AIBugReporterUI from "@/components/AIBugReporterUI";
+import LeadManagementUI from "@/components/LeadManagementUI";
 import DocViewer from "@/components/DocViewer";
 import { getAgentById } from "@/data/agents";
 import Link from "next/link";
@@ -88,6 +89,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <FreelancerInvoiceAutomationUI agent={agent} />
       ) : agent.id === "ai-bug-reporter" ? (
         <AIBugReporterUI agent={agent} />
+      ) : agent.id === "ai-lead-management-automation" ? (
+        <LeadManagementUI agent={agent} />
       ) : (
         <AgentRunner agent={agent} />
       )}
