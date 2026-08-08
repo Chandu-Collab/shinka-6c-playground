@@ -5,6 +5,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import GlobalAssistantWidget from "@/components/GlobalAssistantWidget";
 import ContentProtector from "@/components/security/ContentProtector";
 import Link from "next/link";
+import Image from "next/image";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,8 +19,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shinka-6c Playground",
-  description: "AI Agents Hub — run powerful agents with one click",
+  metadataBase: new URL("https://shinka-ai-playground.netlify.app"),
+  title: "Shinka-6c Playground | AI Agents Hub",
+  description: "Deploy hyper-intelligent agents to automate your sales, repurpose content, and monitor revenue in real-time.",
+  openGraph: {
+    title: "Shinka-6c Playground | AI Agents Hub",
+    description: "Deploy hyper-intelligent agents to automate your sales, repurpose content, and monitor revenue in real-time.",
+    url: "https://shinka-ai-playground.netlify.app",
+    siteName: "Shinka-6c",
+    images: [
+      {
+        url: "/banner.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
   icons: {
     icon: "/logo.png",
   },
@@ -43,8 +60,8 @@ export default function RootLayout({
                 href="/"
                 className="flex items-center gap-2 text-xl font-bold tracking-tight transition-opacity hover:opacity-80"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg shadow-[0_0_15px_rgba(99,102,241,0.5)] overflow-hidden">
-                  <img src="/logo.png" alt="Shinka-6c Logo" className="h-full w-full object-cover" />
+                <div className="relative flex h-8 w-8 items-center justify-center rounded-lg shadow-[0_0_15px_rgba(99,102,241,0.5)] overflow-hidden">
+                  <Image src="/logo.png" alt="Shinka-6c Logo" fill className="object-cover" />
                 </div>
                 Shinka<span className="text-accent">-6c</span>
               </Link>
