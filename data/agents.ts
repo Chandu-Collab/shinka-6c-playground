@@ -412,6 +412,30 @@ export const agents: Agent[] = [
     outputKeys: ["message"],
     docPath: "/docs/AI_Lead_Management_Sales_Automation_Blueprint.pdf",
   },
+  {
+    id: "ai-quote-generator",
+    name: "AI Quote Generator — Professional Business Quotation Automation",
+    description:
+      "Automated business quotation generator. Takes in customer and item details, validates them, and produces a professional quotation.",
+    route: "/agent/ai-quote-generator",
+    icon: "FileSpreadsheet",
+    fields: [
+      { name: "customer_name", label: "Customer Name", type: "text", placeholder: "John Doe", required: true },
+      { name: "customer_email", label: "Customer Email", type: "email", placeholder: "john@example.com", required: true },
+      { name: "customer_phone", label: "Customer Phone", type: "text", placeholder: "+1234567890", required: false },
+      { name: "customer_address", label: "Customer Address", type: "textarea", placeholder: "123 Business Rd.", required: false, rows: 2 },
+      { name: "item_name", label: "Item Name", type: "text", placeholder: "Web Design", required: true },
+      { name: "item_description", label: "Item Description", type: "textarea", placeholder: "Design and develop a 5-page website...", required: false, rows: 2 },
+      { name: "item_quantity", label: "Quantity", type: "text", placeholder: "1", required: true },
+      { name: "item_price", label: "Unit Price", type: "text", placeholder: "5000", required: true },
+      { name: "discount", label: "Discount", type: "text", placeholder: "0", required: false },
+      { name: "tax", label: "Tax Percentage", type: "text", placeholder: "18", required: false },
+      { name: "currency", label: "Currency", type: "text", placeholder: "USD", required: true },
+      { name: "validity_days", label: "Validity Days", type: "text", placeholder: "15", required: true }
+    ],
+    outputKeys: ["message", "quote_id", "status", "currency", "total_amount"],
+    docPath: "/docs/AI_Quote_Generator_Workflow_Documentation.pdf",
+  },
 ];
 
 export function getAgentById(id: string): Agent | undefined {
