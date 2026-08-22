@@ -18,6 +18,7 @@ function getWebhookUrl(agentId: string): string {
     case "ai-bug-reporter": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/AI%20Bug%20Reporter";
     case "ai-receptionist": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/ai-receptionist";
     case "ai-lead-management-automation": return "https://scanning-overfeed-galley.ngrok-free.dev/webhook/lead-capture";
+    case "ai-quote-generator": return process.env.N8N_QUOTE_GENERATOR_WEBHOOK_URL || "https://scanning-overfeed-galley.ngrok-free.dev/webhook/quote-generator";
     default: return "";
   }
 }
@@ -129,6 +130,13 @@ function generateMockResponse(
     };
   }
 
+  if (agentId === "ai-quote-generator") {
+    return {
+      message: "Quotation generated successfully. The professional PDF quote has been sent to your customer.",
+      quote_id: "QT-2026-12345"
+    };
+  }
+
   return { result: "Mock response generated successfully." };
 }
 
@@ -167,6 +175,28 @@ export async function callWebhook(
           time: payload.appointment_time,
         }
       } as Record<string, unknown>;
+    } else if (agent.id === "ai-quote-generator") {
+      finalPayload = {
+        agentId: agent.id,
+        customer: {
+          name: payload.customer_name,
+          email: payload.customer_email,
+          phone: payload.customer_phone,
+          address: payload.customer_address
+        },
+        items: [
+          {
+            name: payload.item_name,
+            description: payload.item_description || "",
+            quantity: payload.item_quantity ? Number(payload.item_quantity) : 1,
+            unit_price: payload.item_price ? Number(payload.item_price) : 0
+          }
+        ],
+        discount: payload.discount ? Number(payload.discount) : 0,
+        tax: payload.tax ? Number(payload.tax) : 0,
+        currency: payload.currency || "USD",
+        validity_days: payload.validity_days ? Number(payload.validity_days) : 0,
+      } as Record<string, unknown>;
     }
 
     const response = await fetch(webhookUrl, {
@@ -176,7 +206,7 @@ export async function callWebhook(
         "ngrok-skip-browser-warning": "69420",
       },
       body: JSON.stringify(finalPayload),
-      signal: AbortSignal.timeout(30000),
+      signal: AbortSignal.timeout(120000),
     });
 
     if (!response.ok) {

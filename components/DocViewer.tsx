@@ -1,6 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
+
+const SafePdfViewer = dynamic(() => import("@/components/SafePdfViewer"), { 
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center bg-zinc-900 flex-col gap-4">
+      <div className="h-8 w-8 rounded-full border-2 border-accent border-t-transparent animate-spin"></div>
+      <p className="text-muted text-sm">Loading PDF viewer...</p>
+    </div>
+  )
+});
 
 export default function DocViewer({ docPath }: { docPath: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,11 +44,7 @@ export default function DocViewer({ docPath }: { docPath: string }) {
             </div>
             <div className="flex-1 overflow-hidden bg-zinc-900 relative">
               <div className="absolute top-0 bottom-0 left-0 w-[calc(100%+20px)]">
-                <iframe
-                  src={`${docPath}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
-                  className="h-full w-full border-0"
-                  title="Documentation PDF"
-                />
+                 <SafePdfViewer docPath={docPath} title="Documentation PDF" />
               </div>
             </div>
           </div>
