@@ -85,7 +85,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <ColdEmailPersonalizerUI agent={agent} />
       ) : agent.id === "website-chat" ? (
         <WebsiteChatbotUI agent={agent} />
-      ) : agent.id === "freelancer-invoice" ? (
+      ) : agent.id === "invoice-generator" || agent.id === "invoice-payment" ? (
         <FreelancerInvoiceAutomationUI agent={agent} />
       ) : agent.id === "ai-bug-reporter" ? (
         <AIBugReporterUI agent={agent} />

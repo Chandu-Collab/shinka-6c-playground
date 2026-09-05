@@ -331,15 +331,15 @@ export const agents: Agent[] = [
     docPath: "/docs/AI_Website_Chatbot_with_Memory_Documentation.pdf",
   },
   {
-    id: "freelancer-invoice",
-    name: "Freelancer Invoice & Billing Automation",
+    id: "invoice-generator",
+    name: "AI Invoice & Payment Automation",
     description:
-      "Automatically generate professional invoices, track them in Google Sheets, save PDFs to Drive, and email them to clients.",
-    route: "/agent/freelancer-invoice",
+      "Complete billing automation series: generate professional invoices with automated tax/discounts, store PDFs in Drive, update Google Sheets, email clients, and record invoice payments.",
+    route: "/agent/invoice-generator",
     icon: "Receipt",
     fields: [],
     outputKeys: ["message"],
-    docPath: "/docs/Freelancer_Invoice_Billing_Automation_Documentation (2).pdf",
+    docPath: "/docs/Invoice_Generator_Setup_Guide_and_Blueprint.pdf",
   },
   {
     id: "ai-bug-reporter",
@@ -435,10 +435,13 @@ export const agents: Agent[] = [
     ],
     outputKeys: ["message", "quote_id", "status", "currency", "total_amount"],
     docPath: "/docs/AI_Quote_Generator_Workflow_Documentation.pdf",
-  },
+  }
 ];
 
 export function getAgentById(id: string): Agent | undefined {
+  if (id === "invoice-payment") {
+    return agents.find((agent) => agent.id === "invoice-generator");
+  }
   return agents.find((agent) => agent.id === id);
 }
 
